@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+<!--MEU-->
+  <ItemGroup>
+    <Compile Include="..\Project.Lib.DAL.EFCore\Context\ProjectDbContext.cs" Link="VirtualDAL\ProjectDbContext.cs" />
+    <Compile Include="..\Project.Lib.DAL.EFCore\GenericRepository.cs" Link="VirtualDAL\GenericRepository.cs" />
+    <Compile Include="..\Project.Lib.DAL.EFCore\StudentsRepository.cs" Link="VirtualDAL\StudentsRepository.cs" />
+    <Compile Include="..\Project.Lib.DAL.EFCore\SubjectsRepository.cs" Link="VirtualDAL\SubjectsRepository.cs" />
+
+  </ItemGroup>
+
+<!--MEU-->
+
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+<!--MEU-->
+
+  <ItemGroup>
+    <Folder Include="VirtualDAL\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Lib\Common.Lib.csproj" />
+    <ProjectReference Include="..\Project.Lib\Project.Lib.csproj" />
+  </ItemGroup>
+  
+  <!--MEU-->
+
+  <ItemGroup>
+    <Compile Update="app.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>app.config</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="app.config">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>app.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>
