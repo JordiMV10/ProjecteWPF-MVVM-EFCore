@@ -18,7 +18,8 @@ namespace Project.Lib.DAL.EFCore.Context
         {
         }
 
-        public ProjectDbContext(DbContextOptions _options)  //Nuevo para probar Test MEU
+        public ProjectDbContext(DbContextOptions _options) //Nuevo para probar Test MEU
+           // : base(_options) 
         {
                 
         }
@@ -32,13 +33,13 @@ namespace Project.Lib.DAL.EFCore.Context
                 .Ignore(x => x.CurrentValidation);
         }
 
-        // C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug
         static string DbConnection = "Data Source=C:\\Users\\jordi\\source\\repos\\ProjecteMVVMWPFNou\\ProjecteMVVMWPFNou\\ProjecteFinalMVVM.db";
         static string AssemblyName = "ProjecteMVVMWPFNou";
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        
-           => optionsBuilder.UseSqlite("Data Source=ProjecteFinalMVVM.db", b => b.MigrationsAssembly(AssemblyName));
-        
+
+            => optionsBuilder.UseSqlite(DbConnection, b => b.MigrationsAssembly(AssemblyName));
 
         //static string AssemblyName = "ProjecteFinalWPFMVVM";
         //protected override void OnConfiguring(DbContextOptionsBuilder options)

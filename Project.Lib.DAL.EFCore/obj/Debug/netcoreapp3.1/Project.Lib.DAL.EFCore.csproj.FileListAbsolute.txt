@@ -13,3 +13,6 @@ C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\obj\Debug\
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\obj\Debug\netcoreapp3.1\Project.Lib.DAL.EFCore.pdb
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug\netcoreapp3.1\Project.Lib.DAL.EFCore.runtimeconfig.json
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug\netcoreapp3.1\Project.Lib.DAL.EFCore.runtimeconfig.dev.json
+C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.dll
+C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.pdb
+C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\Project.Lib.DAL.EFCore\bin\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.dll.config
