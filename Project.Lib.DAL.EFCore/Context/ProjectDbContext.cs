@@ -41,9 +41,6 @@ namespace Project.Lib.DAL.EFCore.Context
 
             => optionsBuilder.UseSqlite(DbConnection, b => b.MigrationsAssembly(AssemblyName));
 
-        //static string AssemblyName = "ProjecteFinalWPFMVVM";
-        //protected override void OnConfiguring(DbContextOptionsBuilder options)
-        //    => options.UseSqlite("Data Source=ProjecteMVVM.db", b => b.MigrationsAssembly(AssemblyName));
 
         internal bool ContainsKey(Guid id)
         {

@@ -78,7 +78,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
                 ChairNumber = ChairNumberVM,
 
             };
-            student.SaveDirecte();
+            student.Save();
             // DbContext.Students.Add(student.Id, student);   //OJO
             GetStudents();    // OJO PRUEBAS !!!  Volver a activar
 
