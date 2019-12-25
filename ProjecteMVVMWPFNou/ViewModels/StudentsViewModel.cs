@@ -82,6 +82,9 @@ namespace ProjecteMVVMWPFNou.ViewModels
             // DbContext.Students.Add(student.Id, student);   //OJO
             GetStudents();    // OJO PRUEBAS !!!  Volver a activar
 
+            DniVM = "";
+            NameVM = "";
+            ChairNumberVM = 0;
         }
 
         public void GetStudents()

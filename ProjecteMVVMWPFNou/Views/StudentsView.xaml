@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <DataGrid ItemsSource="{Binding Students}" Margin="5" />
+                <DataGrid ItemsSource="{Binding StudentsListNou}" Margin="5" />
             </Grid>
             <Grid Grid.Row="1">
                 <Button Content="Get Students" Command="{Binding GetStudentsCommand}" Width="100" Margin="5" HorizontalAlignment="Right" />
