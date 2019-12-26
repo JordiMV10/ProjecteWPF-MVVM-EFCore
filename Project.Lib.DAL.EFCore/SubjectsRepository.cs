@@ -4,6 +4,7 @@ using Project.Lib.DAL.EFCore.Context;
 using Project.Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Project.Lib.DAL.EFCore
@@ -20,7 +21,7 @@ namespace Project.Lib.DAL.EFCore
                 SubjectsByName = new Dictionary<string, Subject>();
 
                 foreach (var subject in dbContext.Subjects)
-                    SubjectsByName.Add(subject.Name, subject);
+                    SubjectsByName.Add(subject.Name, subject);  //Aqui llega con Name=null !!!
 
             }
         }
@@ -46,5 +47,27 @@ namespace Project.Lib.DAL.EFCore
         //{
         //    throw new NotImplementedException();
         //}
+
+        public Subject GetSubject(string name, Guid currentId = default)
+        {
+
+            if (QueryAll().FirstOrDefault(x => x.Name == name) != null)   //MEU
+            {
+                currentId = QueryAll().FirstOrDefault(x => x.Name == name).Id;
+            }
+
+
+            if (DbSetContainsKey(currentId))
+            {
+                var existingSubject = Find(currentId);
+
+                return existingSubject;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
     }
 }

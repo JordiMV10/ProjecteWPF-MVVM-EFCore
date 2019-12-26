@@ -27,14 +27,18 @@ namespace ProjecteMVVMWPFNou.Boot
             {
                 return new GenericRepository<Student>(dbContextConst());
             });
-            var subjectsRepoBuilder = new Func<object[], object>((parameters) =>
+            //var subjectsRepoBuilder = new Func<object[], object>((parameters) =>   //Original
+            //{
+            //    return new SubjectsRepository(dbContextConst());
+            //});
+            var subjectsRepoBuilder = new Func<object[], object>((parameters) =>   //meu
             {
-                return new SubjectsRepository(dbContextConst());
+                return new GenericRepository<Subject>(dbContextConst());
             });
 
             dp.Register<IRepository<Student>, GenericRepository<Student>>(studentRepoBuilder);
-
-            dp.Register<IRepository<Subject>, SubjectsRepository>(subjectsRepoBuilder);
+            dp.Register<IRepository<Subject>, GenericRepository<Subject>>(subjectsRepoBuilder);  //meu
+            dp.Register<IRepository<Subject>, SubjectsRepository>(subjectsRepoBuilder); 
             dp.Register<ISubjectsRepository, SubjectsRepository>(subjectsRepoBuilder);
         }
     }

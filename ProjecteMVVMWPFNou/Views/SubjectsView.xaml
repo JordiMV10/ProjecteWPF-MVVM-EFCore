@@ -4,10 +4,44 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjecteMVVMWPFNou.Views"
+             xmlns:ViewModels="clr-namespace:ProjecteMVVMWPFNou.ViewModels" 
+
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFE5E5E5">
-        <Label Content="HOLA SOY SUBJECTSVIEW" HorizontalAlignment="Left" Margin="245,165,0,0" VerticalAlignment="Top"/>
+        <Grid.DataContext>
+            <ViewModels:SubjectsViewModel/>
+        </Grid.DataContext>
+
+
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+        <Grid Grid.Row="0">
+            <Button Height="30" Content="Guardar Asignatura" Command="{Binding AddSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="555,35,135,85.4" />
+            <Label Content="Nombre Asignatura" HorizontalAlignment="Left" Margin="22,68,0,0" VerticalAlignment="Top" Width="118"/>
+            <TextBox x:Name="SubjectNameText" HorizontalAlignment="Left" Height="23" Margin="165,68,0,0" TextWrapping="Wrap" Text="{Binding SubjectNameVM}" VerticalAlignment="Top" Width="195"/>
+            <Label Content="MENÚ SUBJECTS" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Width="338" FontWeight="Bold" FontSize="18"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <DataGrid ItemsSource="{Binding SubjectListNou}" Margin="5" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <Button Content="Get Subjects" Command="{Binding GetSubjectsCommand}" Width="100" Margin="5" HorizontalAlignment="Right" />
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </UserControl>
