@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProjecteMVVMWPFNou.ViewModels
@@ -69,6 +70,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetStudentsCommand = new RouteCommand(GetStudents);
         }
 
+
         public void AddStudent()
         {
             Student student = new Student()
@@ -79,8 +81,14 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             };
             student.Save();
-            // DbContext.Students.Add(student.Id, student);   //OJO
-            GetStudents();    // OJO PRUEBAS !!!  Volver a activar
+
+
+            this.MessageBoxRequest += new EventHandler<MvvmMessageBoxEventArgs>(StudentsView_MessageBoxRequest);
+
+            AskTheQuestion();
+
+
+            GetStudents();    
 
             DniVM = "";
             NameVM = "";
@@ -93,6 +101,10 @@ namespace ProjecteMVVMWPFNou.ViewModels
             var student = new Student();
             var repo = Student.DepCon.Resolve<IRepository<Student>>();
             StudentsListNou = repo.QueryAll().ToList();
+
+
+            
+
         }
 
         List<Student> _studentsListNou;
@@ -114,5 +126,27 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public ICommand GetStudentsCommand { get; set; }
 
         #endregion
+
+        //Nou : Per mostrar avisos en pantalla !!
+        protected void AskTheQuestion()
+        {
+            MessageBox_Show(ProcessTheAnswer, "Are you sure you want to do this?", "Alert", System.Windows.MessageBoxButton.YesNo);
+
+        }
+
+        public void ProcessTheAnswer(MessageBoxResult result)
+        {
+            if (result == MessageBoxResult.Yes)
+            {
+                GetStudents();
+            }
+        }
+
+        void StudentsView_MessageBoxRequest(object sender, MvvmMessageBoxEventArgs e)
+        {
+
+            e.Show();
+        }
+
     }
 }

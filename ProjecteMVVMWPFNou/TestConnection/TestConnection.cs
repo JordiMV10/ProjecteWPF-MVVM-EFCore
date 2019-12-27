@@ -1,13 +1,8 @@
-﻿using Common.Lib.Core.Context.Interfaces;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Project.Lib.DAL.EFCore.Context;
 using Project.Lib.Models;
-using ProjecteMVVMWPFNou.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ProjecteMVVMWPFNou
 {
@@ -43,12 +38,13 @@ namespace ProjecteMVVMWPFNou
                 };
                 context.Set<Student>().Add(student);
                 context.SaveChanges();
-                var studentVM = new StudentsViewModel();
-                studentVM.GetStudents();
+               
+                
+                
             }
 
-            var connState= _connection.State;
-            var currDb = _connection.Database;
+            
+            
 
             _connection.Close();
         }

@@ -18,9 +18,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public void SqLiteTestConnection()
         {
             var testCon = new TestConnection();
-
-
-
         }
+
+        
+
+
+
     }
 }

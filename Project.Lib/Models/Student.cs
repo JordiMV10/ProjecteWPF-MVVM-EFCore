@@ -23,10 +23,6 @@ namespace Project.Lib.Models
             return base.Save<Student>();
         }
 
-        public SaveResult<Student> SaveDirecte()
-        {
-            return base.SaveDirecte<Student>();
-        }
 
         public SaveResult<Student> Delete()  //MEU
         {
@@ -76,6 +72,8 @@ namespace Project.Lib.Models
             {
                 output.IsSuccess = false;
                 output.Errors.Add("el dni del alumno no puede estar vacío");
+                
+
 
             }
 
@@ -97,7 +95,7 @@ namespace Project.Lib.Models
                 if (entityWithDni.Dni == dni)
                 {
                     // on update
-                    Console.WriteLine("Soy Student : Ya existe un alumno con este DNI");  //Meu
+                    // Console.WriteLine("Soy Student : Ya existe un alumno con este DNI");  //Meu
                     output.IsSuccess = false;
                     output.Errors.Add("ya existe un alumno con ese dni");
                 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjecteMVVMWPFNou.Lib.UI;
+using ProjecteMVVMWPFNou.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,12 @@ namespace ProjecteMVVMWPFNou.Views
         public StudentsView()
         {
             InitializeComponent();
+
+
+
         }
+
+
+
     }
 }
