@@ -116,7 +116,14 @@ namespace Project.Lib.Models
         //public override Repository<T> ResolveRepository<T>()
         //{
         //    return new SubjectRepository() as Repository<T>;
-        
+
+        public SaveResult<Subject> Delete()  //MEU
+        {
+            var saveResult = base.Delete<Subject>();
+
+            return saveResult;
+        }
+
     }
 
 

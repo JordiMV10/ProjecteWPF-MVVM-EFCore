@@ -20,11 +20,6 @@ namespace Project.Lib.DAL.EFCore
             _dbContext = dbContext;
         }
 
-        //private ProjectDbContext ProjectDbContext { get; set; }
-        //public GenericRepository()
-        //{
-        //    ProjectDbContext = new ProjectDbContext();
-        //}
 
 
 
@@ -36,11 +31,6 @@ namespace Project.Lib.DAL.EFCore
             }
         }
 
-        // private ProjectDbContext projectDbContext;
-        //public GenericRepository(ProjectDbContext projectDbContext)
-        //{
-        //    this._dbContext = projectDbContext;
-        //}
 
         public virtual SaveResult<T> Add(T entity)
         {
@@ -118,10 +108,15 @@ namespace Project.Lib.DAL.EFCore
                 IsSuccess = true
             };
 
+            // if (_dbContext.ContainsKey(entity.Id))
 
-            if (_dbContext.ContainsKey(entity.Id))
+            
+            if (DbSetContainsKey(entity.Id))   //Meu
             {
                 _dbContext.Remove(entity.Id);
+                _dbContext.SaveChanges();
+
+                
                 output.IsSuccess = true;
             }
 
@@ -135,7 +130,16 @@ namespace Project.Lib.DAL.EFCore
 
         public bool DbSetContainsKey(Guid id)
         {
-            return _dbContext.ContainsKey(id);
+            //var entityWithId = QueryAll().FirstOrDefault(s => s.Id == id);   //Funciona, pero parece mejor para Find(id)
+            //if (entityWithId != null)
+            //    return true;
+            //else
+            //    return false;
+
+            if (DbSet.Any(x => x.Id == id))  //Funciona y es rápido.
+                return true;
+            else
+                return false;
         }
     }
 }

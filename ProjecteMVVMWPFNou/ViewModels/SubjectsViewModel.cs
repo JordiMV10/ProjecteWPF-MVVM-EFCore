@@ -79,6 +79,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
             set
             {
                 _subjectsListNou = value;
+
+                if (value != null && value.Count > 0)  //Nou
+                {
+                    CurrentSubject = value[0];          //Nou
+                }                                       //Nou
                 OnPropertyChanged();
             }
         }
@@ -86,8 +91,6 @@ namespace ProjecteMVVMWPFNou.ViewModels
         #region Commands
         public ICommand AddSubjectCommand { get; set; }
         public ICommand GetSubjectsCommand { get; set; }
-
-        #endregion
 
         List<string> _errorsList;
 
@@ -104,6 +107,74 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
+        //NOU
+
+        //public ICommand DelSubjectCommand { get; set; }
+
+        private ICommand _delSubjectCommand;
+        public ICommand DelSubjectCommand   
+        {
+            get
+            {
+                if (_delSubjectCommand == null)
+                    _delSubjectCommand = new RouteCommand(DelSubject);
+                return _delSubjectCommand;
+            }
+        }
+
+
+        private Subject _currentSubject;
+        public Subject CurrentSubject
+        {
+            get { return _currentSubject; }
+            set
+            {
+                _currentSubject = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public void DelSubject()
+        {
+            Subject subject = new Subject()
+            {
+                Name = CurrentSubject.Name ,  //OJO CurrentSubject
+                Id = CurrentSubject.Id
+            };
+            subject.Delete();
+
+            ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
+
+
+            GetSubjects();
+
+            SubjectNameVM = "";
+        }
+        #endregion
+
+        private ICommand _verInfoCommand;
+        public ICommand VerInfoCommand   //Funciona . Es el boton de Editar !!
+        {
+            get
+            {
+                if (_verInfoCommand == null)
+                    _verInfoCommand = new RouteCommand(VerInfo);
+                return _verInfoCommand;
+            }
+        }
+
+        private bool CanShowInfo
+        {
+            get
+            {
+                return CurrentSubject != null;
+            }
+        }
+
+        private void VerInfo()    //Funciona
+        {
+           SubjectNameVM=CurrentSubject.Name;
+        }
 
     }
 }
