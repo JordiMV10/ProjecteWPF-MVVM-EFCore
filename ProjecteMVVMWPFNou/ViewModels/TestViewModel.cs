@@ -1,4 +1,5 @@
 ﻿using ProjecteMVVMWPFNou.Lib.UI;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 
@@ -20,7 +21,6 @@ namespace ProjecteMVVMWPFNou.ViewModels
             var testCon = new TestConnection();
         }
 
-        
 
 
 

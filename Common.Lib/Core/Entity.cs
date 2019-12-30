@@ -46,35 +46,6 @@ namespace Common.Lib.Core
         }
 
 
-        public virtual SaveResult<T> SaveDirecte<T>() where T : Entity
-        {
-            var output = new SaveResult<T>();
-
-            // CurrentValidation = Validate();
-
-            if (true)
-            {
-                var repo = DepCon.Resolve<IRepository<T>>();
-
-                if (this.Id == Guid.Empty)
-                {
-
-                    output = repo.Add(this as T);
-                }
-                else
-                {
-                    output = repo.Update(this as T);
-                }
-            }
-
-            output.Validation = CurrentValidation;
-
-            return output;
-        }
-
-
-
-
 
         public virtual ValidationResult Validate()
         {

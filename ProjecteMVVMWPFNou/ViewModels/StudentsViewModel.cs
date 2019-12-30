@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using Common.Lib.Infrastructure;
 
 namespace ProjecteMVVMWPFNou.ViewModels
 {
@@ -70,6 +71,20 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetStudentsCommand = new RouteCommand(GetStudents);
         }
 
+        List<string> _errorsList;
+
+        public List<string> ErrorsList
+        {
+            get
+            {
+                return _errorsList;
+            }
+            set
+            {
+                _errorsList = value;
+                OnPropertyChanged();
+            }
+        }
 
         public void AddStudent()
         {
@@ -82,13 +97,16 @@ namespace ProjecteMVVMWPFNou.ViewModels
             };
             student.Save();
 
+            //Funciona (2 lineas) aparece mensaje
+            // this.MessageBoxRequest += new EventHandler<MvvmMessageBoxEventArgs>(StudentsView_MessageBoxRequest);
 
-            this.MessageBoxRequest += new EventHandler<MvvmMessageBoxEventArgs>(StudentsView_MessageBoxRequest);
-
-            AskTheQuestion();
+            // AskTheQuestion();
 
 
-            GetStudents();    
+            // ErrorsList = student.CurrentValidation.Errors;  //ES bo, enseña 2 la longitud de los 2 mensajes y no el texto
+            
+            ErrorsList = student.CurrentValidation.ErrorsQueryAll().ToList();
+            GetStudents();
 
             DniVM = "";
             NameVM = "";
@@ -102,10 +120,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
             var repo = Student.DepCon.Resolve<IRepository<Student>>();
             StudentsListNou = repo.QueryAll().ToList();
 
-
-            
-
         }
+
+
+
+
 
         List<Student> _studentsListNou;
         public List<Student> StudentsListNou

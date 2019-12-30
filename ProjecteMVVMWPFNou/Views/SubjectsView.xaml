@@ -23,10 +23,15 @@
 
 
         <Grid Grid.Row="0">
-            <Button Height="30" Content="Guardar Asignatura" Command="{Binding AddSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="555,35,135,85.4" />
+            <Button Height="30" Content="Guardar Asignatura" Command="{Binding AddSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="250,110,440,10" />
             <Label Content="Nombre Asignatura" HorizontalAlignment="Left" Margin="22,68,0,0" VerticalAlignment="Top" Width="118"/>
             <TextBox x:Name="SubjectNameText" HorizontalAlignment="Left" Height="23" Margin="165,68,0,0" TextWrapping="Wrap" Text="{Binding SubjectNameVM}" VerticalAlignment="Top" Width="195"/>
             <Label Content="MENÚ SUBJECTS" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Width="338" FontWeight="Bold" FontSize="18"/>
+            <Grid Margin="480,24,10,10" Background="#FFBDC0CB">
+                <DataGrid ItemsSource="{Binding ErrorsList}" />
+            </Grid>
+            <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
+
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

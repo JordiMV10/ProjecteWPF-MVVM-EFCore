@@ -53,6 +53,9 @@ namespace ProjecteMVVMWPFNou.ViewModels
             };
             subject.Save();
 
+            ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
+
+
             GetSubjects();    
 
             SubjectNameVM = "";
@@ -85,5 +88,22 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public ICommand GetSubjectsCommand { get; set; }
 
         #endregion
+
+        List<string> _errorsList;
+
+        public List<string> ErrorsList
+        {
+            get
+            {
+                return _errorsList;
+            }
+            set
+            {
+                _errorsList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
     }
 }

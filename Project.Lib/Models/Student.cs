@@ -18,9 +18,13 @@ namespace Project.Lib.Models
 
         public Guid Guid { get; private set; }
 
+
+
         public SaveResult<Student> Save()
         {
             return base.Save<Student>();
+
+            
         }
 
 
@@ -73,7 +77,6 @@ namespace Project.Lib.Models
                 output.IsSuccess = false;
                 output.Errors.Add("el dni del alumno no puede estar vacío");
                 
-
 
             }
 
@@ -129,7 +132,7 @@ namespace Project.Lib.Models
 
         public static ValidationResult<int> ValidateChairNumber(string chairNumberText, Guid currentId = default)
         {
-            var output = new ValidationResult<int>()
+            var output = new ValidationResult<int>()   
             {
                 IsSuccess = true
             };
@@ -181,7 +184,6 @@ namespace Project.Lib.Models
 
             return output;
         }
-
 
 
         #endregion
