@@ -13,7 +13,7 @@ namespace Project.Lib.Models
     {
         public string Name { get; set; }
 
-        // public Guid Guid { get; private set; }
+        public Guid Guid { get; private set; }
 
         public SaveResult<Subject> Save()
         {

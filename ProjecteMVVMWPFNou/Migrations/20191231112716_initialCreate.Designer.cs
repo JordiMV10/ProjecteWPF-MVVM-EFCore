@@ -9,8 +9,8 @@ using Project.Lib.DAL.EFCore.Context;
 namespace ProjecteMVVMWPFNou.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20191222115524_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20191231112716_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +57,10 @@ namespace ProjecteMVVMWPFNou.Migrations
             modelBuilder.Entity("Project.Lib.Models.Subject", b =>
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnName("Subject_Guid")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasColumnName("Subject_Name")

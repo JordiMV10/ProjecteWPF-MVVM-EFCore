@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "3.1.0",
           "Microsoft.EntityFrameworkCore.Tools": "3.1.0",
           "Project.Lib": "1.0.0",
-          "ProjecteMVVMWPFNou": "1.0.0.0"
+          "ProjecteMVVMWPFNou": "1.0.0",
+          "ProjecteMVVMWPFNou.Reference": "1.0.0.0"
         },
         "runtime": {
           "Project.Lib.DAL.EFCore.dll": {}
@@ -383,7 +384,7 @@
           "Project.Lib.dll": {}
         }
       },
-      "ProjecteMVVMWPFNou/1.0.0.0": {
+      "ProjecteMVVMWPFNou.Reference/1.0.0.0": {
         "runtime": {
           "ProjecteMVVMWPFNou.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -647,7 +648,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "ProjecteMVVMWPFNou/1.0.0.0": {
+    "ProjecteMVVMWPFNou.Reference/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

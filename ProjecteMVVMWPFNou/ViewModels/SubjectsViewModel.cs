@@ -130,17 +130,20 @@ namespace ProjecteMVVMWPFNou.ViewModels
             set
             {
                 _currentSubject = value;
-                OnPropertyChanged();
+                OnPropertyChanged("CurrentSubject");
+                OnPropertyChanged("CanShowInfo");
             }
         }
 
         public void DelSubject()
         {
-            Subject subject = new Subject()
-            {
-                Name = CurrentSubject.Name ,  //OJO CurrentSubject
-                Id = CurrentSubject.Id
-            };
+
+            Subject subject = new Subject();
+
+            subject = CurrentSubject;
+                //Name = CurrentSubject.Name ,  //OJO CurrentSubject
+                //Id = CurrentSubject.Id
+            
             subject.Delete();
 
             ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
@@ -153,7 +156,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         #endregion
 
         private ICommand _verInfoCommand;
-        public ICommand VerInfoCommand   //Funciona . Es el boton de Editar !!
+        public ICommand VerInfoCommand   //No Funciona bien, enseña el primero de la lista. Es el boton de Editar !!
         {
             get
             {
@@ -176,5 +179,20 @@ namespace ProjecteMVVMWPFNou.ViewModels
            SubjectNameVM=CurrentSubject.Name;
         }
 
+
+        //private void EliminarPersona(object obj)
+        //{
+        //    if (obj != null)
+        //    {
+        //        CurrentPersona = (Persona)obj;
+        //        if (App.DbConnector.eliminarPersona(CurrentPersona))
+        //        {
+        //            if (MessageBox.Show("Eliminado " + CurrentPersona.Nombre + "!") == MessageBoxResult.OK)
+        //            {
+        //                ListaPersonas.Remove(((Persona)obj));
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

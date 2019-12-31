@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProjecteMVVMWPFNou.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,8 @@ namespace ProjecteMVVMWPFNou.Migrations
                     Dni = table.Column<string>(nullable: true),
                     ChairNumber = table.Column<int>(nullable: true),
                     Guid = table.Column<Guid>(nullable: true),
-                    Subject_Name = table.Column<string>(nullable: true)
+                    Subject_Name = table.Column<string>(nullable: true),
+                    Subject_Guid = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {

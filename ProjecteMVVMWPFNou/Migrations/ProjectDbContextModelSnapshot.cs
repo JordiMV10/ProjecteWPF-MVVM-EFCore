@@ -56,6 +56,10 @@ namespace ProjecteMVVMWPFNou.Migrations
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
 
+                    b.Property<Guid>("Guid")
+                        .HasColumnName("Subject_Guid")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .HasColumnName("Subject_Name")
                         .HasColumnType("TEXT");

@@ -18,6 +18,9 @@ namespace ProjecteMVVMWPFNou.Lib.UI
             _canExecute = canExecute;
         }
 
+        
+
+
         #endregion
 
         #region ICommand Members
@@ -44,5 +47,6 @@ namespace ProjecteMVVMWPFNou.Lib.UI
 
         private readonly Action _execute = null;
         private readonly Predicate<object> _canExecute = null;
+      
     }
 }

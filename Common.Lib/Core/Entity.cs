@@ -57,7 +57,7 @@ namespace Common.Lib.Core
             return output;
         }
 
-        public virtual SaveResult<T> Delete<T>() where T : Entity   //MEU
+        public virtual SaveResult<T> Delete<T>() where T : Entity   //MEU 
         {
             var output = new SaveResult<T>();
 

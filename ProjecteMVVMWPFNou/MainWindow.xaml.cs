@@ -33,7 +33,7 @@ namespace ProjecteMVVMWPFNou
         {
             var optionsBuilder = new DbContextOptionsBuilder<ProjectDbContext>();
             
-            optionsBuilder.UseSqlite("Data Source=ProjecteFinalMVVM.db");
+            optionsBuilder.UseSqlite("Data Source=ProjecteFinalMVVM2.db");
             var dbContextConst = new Func<ProjectDbContext>(() =>
             {
                 return new ProjectDbContext(optionsBuilder.Options);

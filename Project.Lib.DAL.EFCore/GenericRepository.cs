@@ -108,12 +108,11 @@ namespace Project.Lib.DAL.EFCore
                 IsSuccess = true
             };
 
-            // if (_dbContext.ContainsKey(entity.Id))
 
             
-            if (DbSetContainsKey(entity.Id))   //Meu
+            if (DbSetContainsKey(entity.Id))   //Meu Funciona OK
             {
-                _dbContext.Remove(entity.Id);
+                _dbContext.Set<T>().Remove(entity); 
                 _dbContext.SaveChanges();
 
                 

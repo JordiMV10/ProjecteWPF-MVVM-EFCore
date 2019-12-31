@@ -24,6 +24,10 @@ namespace Project.Lib.DAL.EFCore.Context
                 
         }
         
+        public ProjectDbContext()     //Meu para probar bbdd
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -33,7 +37,7 @@ namespace Project.Lib.DAL.EFCore.Context
                 .Ignore(x => x.CurrentValidation);
         }
 
-        static string DbConnection = "Data Source=C:\\Users\\jordi\\source\\repos\\ProjecteMVVMWPFNou\\ProjecteMVVMWPFNou\\ProjecteFinalMVVM.db";
+        static string DbConnection = "Data Source=C:\\Users\\jordi\\source\\repos\\ProjecteMVVMWPFNou\\ProjecteMVVMWPFNou\\ProjecteFinalMVVM2.db";
         static string AssemblyName = "ProjecteMVVMWPFNou";
 
 
@@ -49,7 +53,7 @@ namespace Project.Lib.DAL.EFCore.Context
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ProjectDbContext>(options => options.UseSqlite("Data Source=ProjecteFinalMVVM.db"));
+            services.AddDbContext<ProjectDbContext>(options => options.UseSqlite("Data Source=ProjecteFinalMVVM2.db"));
         }
     }
 }
