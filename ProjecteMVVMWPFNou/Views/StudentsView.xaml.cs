@@ -24,11 +24,7 @@ namespace ProjecteMVVMWPFNou.Views
         {
             InitializeComponent();
 
-
-
         }
-
-
 
     }
 }

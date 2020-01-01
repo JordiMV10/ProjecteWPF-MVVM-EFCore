@@ -15,6 +15,7 @@
 
 
 
+
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
@@ -44,9 +45,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid ItemsSource="{Binding SubjectListNou}" Margin="5,5,10,5" />
-                <Button Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" Command="{Binding VerInfoCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" />
-                <Button Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5" Command="{Binding DelSubjectCommand}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" />
+                <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectListNou}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" />
+                <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,   AncestorType={x:Type Grid}}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"  Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
+                <Button Command="{Binding DelSubjectCommand}" Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
+
+                <!--<Button Command="{Binding DataContext.VerInfo2Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"  Grid.Column="2" Content="Ver Info" Background="White"/>
+                <Button Command="{Binding DataContext.EliminarPersonaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"  CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" Grid.Column="3" Content="Eliminar" Background="White"/>-->
 
 
             </Grid>

@@ -4,7 +4,6 @@ using ProjecteMVVMWPFNou.Lib.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Input;
 
 namespace ProjecteMVVMWPFNou.ViewModels
@@ -109,10 +108,9 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
         //NOU
 
-        //public ICommand DelSubjectCommand { get; set; }
 
         private ICommand _delSubjectCommand;
-        public ICommand DelSubjectCommand   
+        public ICommand DelSubjectCommand   //Meu funciona OK
         {
             get
             {
@@ -135,14 +133,12 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        public void DelSubject()
+        public void DelSubject()    //Meu, verificado funciona OK
         {
 
             Subject subject = new Subject();
 
             subject = CurrentSubject;
-                //Name = CurrentSubject.Name ,  //OJO CurrentSubject
-                //Id = CurrentSubject.Id
             
             subject.Delete();
 
@@ -155,14 +151,16 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
         #endregion
 
-        private ICommand _verInfoCommand;
-        public ICommand VerInfoCommand   //No Funciona bien, enseña el primero de la lista. Es el boton de Editar !!
+        private ICommand _editInfoCommand;
+        public ICommand EditCommand   //No Funciona bien, enseña el primero de la lista. Es el boton de Editar !!
         {
             get
             {
-                if (_verInfoCommand == null)
-                    _verInfoCommand = new RouteCommand(VerInfo);
-                return _verInfoCommand;
+                if (_editInfoCommand == null)
+                    _editInfoCommand = new ParamCommand(new Action<object>(Edit));
+                return _editInfoCommand;
+
+
             }
         }
 
@@ -174,10 +172,26 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        private void VerInfo()    //Funciona
+        private void Edit(object obj)    
         {
-           SubjectNameVM=CurrentSubject.Name;
+
+            if (obj != null)
+            {
+                var subject = new Subject();
+                
+
+                subject = CurrentSubject;
+
+                SubjectNameVM = CurrentSubject.Name;
+                //CurrentPersona = (Persona)obj;
+                //MessageBox.Show(CurrentPersona.Nombre);
+            }
+
+                
         }
+            
+            
+        
 
 
         //private void EliminarPersona(object obj)

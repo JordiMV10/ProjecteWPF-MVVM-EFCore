@@ -61,7 +61,6 @@ namespace Project.Lib.DAL.EFCore
 
         public IQueryable<T> QueryAll()
         {
-            // return ProjectDbContext.Set<T>().AsQueryable();
             return DbSet.AsQueryable();
         }
 
@@ -101,13 +100,12 @@ namespace Project.Lib.DAL.EFCore
 
 
 
-        public virtual SaveResult<T> Delete(T entity)   //MEU
+        public virtual SaveResult<T> Delete(T entity)   //MEU Funciona OK
         {
             var output = new SaveResult<T>()
             {
                 IsSuccess = true
             };
-
 
             
             if (DbSetContainsKey(entity.Id))   //Meu Funciona OK
