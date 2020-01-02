@@ -23,7 +23,7 @@
 
 
         <Grid Grid.Row="0" DataContext="{Binding Mode=OneWay}">
-            <Button Height="30" Content="Guardar Estudiante" Command="{Binding AddStudentCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,21,345,99" />
+            <Button Height="30" Content="Guardar Estudiante" Command="{Binding SaveStudentCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,21,345,99" />
             <Label Content="Dni" HorizontalAlignment="Left" Margin="22,17,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.771,-0.594" Width="78"/>
             <Label Content="Nombre" HorizontalAlignment="Left" Margin="22,68,0,0" VerticalAlignment="Top" Width="78"/>
             <Label Content="Silla" HorizontalAlignment="Left" Margin="22,107,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.13,-0.391" Width="78"/>
@@ -46,7 +46,15 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <DataGrid ItemsSource="{Binding StudentsListNou}" Margin="5" />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <DataGrid ItemsSource="{Binding StudentsListNou}" SelectedItem="{Binding CurrentStudent}" Margin="5" />
+                <Button Command="{Binding EditStudentCommand}"  Grid.Column="2" Content="Editar" Background="White" Margin="0,5,10,140" />
+                <Button Command="{Binding DelStudentCommand}" Grid.Column="2" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
+
             </Grid>
             <Grid Grid.Row="1">
                 <Button Content="Get Students" Command="{Binding GetStudentsCommand}" Width="100" Margin="5" HorizontalAlignment="Right" />

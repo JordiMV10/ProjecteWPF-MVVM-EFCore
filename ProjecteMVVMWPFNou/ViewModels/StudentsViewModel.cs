@@ -67,8 +67,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public StudentsViewModel()
         {
 
-            AddStudentCommand = new RouteCommand(AddStudent);
+            SaveStudentCommand = new RouteCommand(SaveStudent);
             GetStudentsCommand = new RouteCommand(GetStudents);
+            DelStudentCommand = new RouteCommand(DelStudent);
+            EditStudentCommand = new RouteCommand(EditStudent);
+
         }
 
         List<string> _errorsList;
@@ -86,7 +89,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        public void AddStudent()
+        public void SaveStudent()
         {
             Student student = new Student()
             {
@@ -95,6 +98,10 @@ namespace ProjecteMVVMWPFNou.ViewModels
                 ChairNumber = ChairNumberVM,
 
             };
+
+            if (CurrentStudent != null)
+                student.Id = CurrentStudent.Id;
+
             student.Save();
 
             //Funciona (2 lineas) aparece mensaje
@@ -141,10 +148,71 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
         #region Commands
-        public ICommand AddStudentCommand { get; set; }
+        public ICommand SaveStudentCommand { get; set; }
         public ICommand GetStudentsCommand { get; set; }
 
+        public ICommand DelStudentCommand { get; set; } //Meu funciona OK
+        public ICommand EditStudentCommand { get; set; }
+
         #endregion
+
+
+        private Student _currentStudent;
+        public Student CurrentStudent  //Meu ok funciona !!
+        {
+            get { return _currentStudent; }
+            set
+            {
+                _currentStudent = value;
+                OnPropertyChanged("CurrentSubject");
+                OnPropertyChanged("CanShowInfo");
+            }
+        }
+
+        public void DelStudent()    //Meu, verificado funciona OK
+        {
+
+            Student student = new Student();
+
+            student = CurrentStudent;
+
+            student.Delete();
+
+            ErrorsList = student.CurrentValidation.ErrorsQueryAll().ToList();
+
+
+            GetStudents();
+
+            DniVM = "";
+            NameVM = "";
+            ChairNumberVM = 0;
+        }
+
+        private bool CanShowInfo
+        {
+            get
+            {
+                return CurrentStudent != null;
+            }
+        }
+
+
+        private void EditStudent()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
+        {
+
+            var student = new Student();
+
+            student = CurrentStudent;
+
+            DniVM = CurrentStudent.Dni;
+            NameVM = CurrentStudent.Name;
+            ChairNumberVM = CurrentStudent.ChairNumber;
+
+            
+        }
+
+
+
 
         //Nou : Per mostrar avisos en pantalla !!
         protected void AskTheQuestion()

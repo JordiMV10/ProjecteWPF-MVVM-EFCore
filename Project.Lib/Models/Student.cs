@@ -93,15 +93,16 @@ namespace Project.Lib.Models
                 output.Errors.Add("ya existe un alumno con ese dni");
 
             }
-            else if (currentId != default && entityWithDni.Id != currentId)
+
+            else if (currentId != default && entityWithDni != null && entityWithDni.Id != currentId)    //Modificado
             {
-                if (entityWithDni.Dni == dni)
-                {
+                    if (entityWithDni.Dni == dni)
+                    {
                     // on update
                     // Console.WriteLine("Soy Student : Ya existe un alumno con este DNI");  //Meu
                     output.IsSuccess = false;
                     output.Errors.Add("ya existe un alumno con ese dni");
-                }
+                    }
             }
             #endregion
 

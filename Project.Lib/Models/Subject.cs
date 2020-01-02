@@ -56,7 +56,7 @@ namespace Project.Lib.Models
 
             }
             //else if (currentId != default && entityWithName.Id != currentId)  //Original
-            else if (currentId != default && entityWithName != null)    //Modificado
+            else if (currentId != default && entityWithName != null && entityWithName.Id != currentId)    //Modificado
             {
                 if (entityWithName.Name == name)
                 {
