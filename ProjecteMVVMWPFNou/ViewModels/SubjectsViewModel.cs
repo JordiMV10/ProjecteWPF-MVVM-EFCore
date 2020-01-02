@@ -10,6 +10,17 @@ namespace ProjecteMVVMWPFNou.ViewModels
 {
     public class SubjectsViewModel : ViewModelBase
     {
+
+        public SubjectsViewModel()
+        {
+
+            SaveSubjectCommand = new RouteCommand(SaveSubject);
+            GetSubjectsCommand = new RouteCommand(GetSubjects);
+            DelSubjectCommand = new RouteCommand(DelSubject);
+            EditSubjectCommand = new RouteCommand(EditSubject);
+        }
+
+
         private string _subjectNameVM;
 
         public string SubjectNameVM
@@ -22,34 +33,22 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        public List<Subject> Subjects
-        {
-            get
-            {
-                return _subjects;
-            }
-            set
-            {
-                _subjects = value;
-                OnPropertyChanged();
-            }
-        }
-        List<Subject> _subjects;
 
 
-        public SubjectsViewModel()
-        {
 
-            AddSubjectCommand = new RouteCommand(AddSubject);
-            GetSubjectsCommand = new RouteCommand(GetSubjects);
-        }
-
-        public void AddSubject()
+        public void SaveSubject()   //Meu : OK funciona
         {
             Subject subject = new Subject()
             {
-                Name = SubjectNameVM
+                Name = SubjectNameVM,
+                
             };
+            //subject = CurrentSubject;
+            //subject.Name = SubjectNameVM;
+
+            if (CurrentSubject != null)
+                subject.Id = CurrentSubject.Id;
+
             subject.Save();
 
             ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
@@ -60,24 +59,24 @@ namespace ProjecteMVVMWPFNou.ViewModels
             SubjectNameVM = "";
         }
 
-        public void GetSubjects()
+        public void GetSubjects()    //Meu : OK funciona
         {
 
             var subject = new Subject();
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-            SubjectListNou = repo.QueryAll().ToList();
+            SubjectList = repo.QueryAll().ToList();
         }
 
-        List<Subject> _subjectsListNou;
-        public List<Subject> SubjectListNou
+        List<Subject> _subjectsList;
+        public List<Subject> SubjectList  //Meu : OK funciona
         {
             get
             {
-                return _subjectsListNou;
+                return _subjectsList;
             }
             set
             {
-                _subjectsListNou = value;
+                _subjectsList = value;
 
                 if (value != null && value.Count > 0)  //Nou
                 {
@@ -88,8 +87,13 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
         #region Commands
-        public ICommand AddSubjectCommand { get; set; }
+        public ICommand SaveSubjectCommand { get; set; }
         public ICommand GetSubjectsCommand { get; set; }
+        public ICommand DelSubjectCommand { get; set; } //Meu funciona OK
+        public ICommand EditSubjectCommand { get; set; }
+
+        #endregion
+
 
         List<string> _errorsList;
 
@@ -109,20 +113,8 @@ namespace ProjecteMVVMWPFNou.ViewModels
         //NOU
 
 
-        private ICommand _delSubjectCommand;
-        public ICommand DelSubjectCommand   //Meu funciona OK
-        {
-            get
-            {
-                if (_delSubjectCommand == null)
-                    _delSubjectCommand = new RouteCommand(DelSubject);
-                return _delSubjectCommand;
-            }
-        }
-
-
         private Subject _currentSubject;
-        public Subject CurrentSubject
+        public Subject CurrentSubject  //Meu ok funciona !!
         {
             get { return _currentSubject; }
             set
@@ -149,20 +141,20 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             SubjectNameVM = "";
         }
-        #endregion
+        
 
-        private ICommand _editInfoCommand;
-        public ICommand EditCommand   //No Funciona bien, enseña el primero de la lista. Es el boton de Editar !!
-        {
-            get
-            {
-                if (_editInfoCommand == null)
-                    _editInfoCommand = new ParamCommand(new Action<object>(Edit));
-                return _editInfoCommand;
+        //private ICommand _editInfoCommand;
+        //public ICommand EditCommand   //No Funciona bien, enseña el primero de la lista. Es el boton de Editar !!
+        //{
+        //    get
+        //    {
+        //        if (_editInfoCommand == null)
+        //            _editInfoCommand = new ParamCommand(new Action<object>(Edit));
+        //        return _editInfoCommand;
 
 
-            }
-        }
+        //    }
+        //}
 
         private bool CanShowInfo
         {
@@ -172,41 +164,40 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        private void Edit(object obj)    
-        {
 
-            if (obj != null)
-            {
+        private void EditSubject()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
+        {
+            
                 var subject = new Subject();
-                
 
                 subject = CurrentSubject;
 
                 SubjectNameVM = CurrentSubject.Name;
-                //CurrentPersona = (Persona)obj;
-                //MessageBox.Show(CurrentPersona.Nombre);
-            }
-
-                
         }
-            
-            
-        
 
 
-        //private void EliminarPersona(object obj)
+
+        //private void Edit(object obj)    
         //{
+
         //    if (obj != null)
         //    {
-        //        CurrentPersona = (Persona)obj;
-        //        if (App.DbConnector.eliminarPersona(CurrentPersona))
-        //        {
-        //            if (MessageBox.Show("Eliminado " + CurrentPersona.Nombre + "!") == MessageBoxResult.OK)
-        //            {
-        //                ListaPersonas.Remove(((Persona)obj));
-        //            }
-        //        }
+        //        var subject = new Subject();
+
+
+        //        subject = CurrentSubject;
+
+        //        SubjectNameVM = CurrentSubject.Name;
+        //        //CurrentPersona = (Persona)obj;
+        //        //MessageBox.Show(CurrentPersona.Nombre);
         //    }
+
+
         //}
+
+
+
+
+
     }
 }

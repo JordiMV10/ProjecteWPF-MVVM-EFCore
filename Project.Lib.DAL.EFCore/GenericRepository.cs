@@ -71,7 +71,7 @@ namespace Project.Lib.DAL.EFCore
 
 
 
-        public virtual SaveResult<T> Update(T entity)   //Actualizado meu. Revisar
+        public virtual SaveResult<T> Update(T entity)   //Actualizado meu. Funciona OK
         {
             var output = new SaveResult<T>();
 
@@ -87,12 +87,12 @@ namespace Project.Lib.DAL.EFCore
                 output.Validation.Errors.Add("No existe una entity con ese id");
             }
 
-            if (output.IsSuccess || _dbContext.ContainsKey(entity.Id))
+            if (output.IsSuccess || DbSetContainsKey(entity.Id))
             {
 
-                _dbContext.Set<T>().Update(entity);  //AQUI OJO !!
+                _dbContext.Set<T>().Update(entity);  
                 _dbContext.SaveChanges();
-                output.IsSuccess = true;  //meu
+                output.IsSuccess = true;  
             }
 
             return output;
@@ -125,7 +125,7 @@ namespace Project.Lib.DAL.EFCore
             return output;
         }
 
-        public bool DbSetContainsKey(Guid id)
+        public bool DbSetContainsKey(Guid id)  //Meu funciona OK
         {
             //var entityWithId = QueryAll().FirstOrDefault(s => s.Id == id);   //Funciona, pero parece mejor para Find(id)
             //if (entityWithId != null)

@@ -24,7 +24,7 @@
 
 
         <Grid Grid.Row="0">
-            <Button Height="30" Content="Guardar Asignatura" Command="{Binding AddSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="250,110,440,10" />
+            <Button Height="30" Content="Guardar Asignatura" Command="{Binding SaveSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="250,110,440,10" />
             <Label Content="Nombre Asignatura" HorizontalAlignment="Left" Margin="22,68,0,0" VerticalAlignment="Top" Width="118"/>
             <TextBox x:Name="SubjectNameText" HorizontalAlignment="Left" Height="23" Margin="165,68,0,0" TextWrapping="Wrap" Text="{Binding SubjectNameVM}" VerticalAlignment="Top" Width="195"/>
             <Label Content="MENÚ SUBJECTS" HorizontalAlignment="Left" Margin="22,25,0,0" VerticalAlignment="Top" Width="338" FontWeight="Bold" FontSize="18"/>
@@ -42,12 +42,13 @@
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="105*"/>
+                    <ColumnDefinition Width="143*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectListNou}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" />
-                <Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1,   AncestorType={x:Type Grid}}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"  Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
-                <Button Command="{Binding DelSubjectCommand}" Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
+                <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectList}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" Grid.ColumnSpan="2" />
+                <Button Command="{Binding EditSubjectCommand}"  Grid.Column="2" Content="Editar" Background="White" Margin="0,5,10,140" />
+                <Button Command="{Binding DelSubjectCommand}" Grid.Column="2" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
 
                 <!--<Button Command="{Binding DataContext.VerInfo2Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"  Grid.Column="2" Content="Ver Info" Background="White"/>
                 <Button Command="{Binding DataContext.EliminarPersonaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"  CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" Grid.Column="3" Content="Eliminar" Background="White"/>-->

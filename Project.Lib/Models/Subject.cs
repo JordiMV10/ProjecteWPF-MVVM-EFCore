@@ -55,7 +55,8 @@ namespace Project.Lib.Models
                 // Console.WriteLine("Soy Subject : Ya existe una Asignatura con este Nombre");
 
             }
-            else if (currentId != default && entityWithName.Id != currentId)
+            //else if (currentId != default && entityWithName.Id != currentId)  //Original
+            else if (currentId != default && entityWithName != null)    //Modificado
             {
                 if (entityWithName.Name == name)
                 {

@@ -18,13 +18,13 @@ namespace Project.Lib.DAL.EFCore.Context
         {
         }
 
-        public ProjectDbContext(DbContextOptions _options) //Nuevo para probar Test MEU
+        public ProjectDbContext(DbContextOptions _options) //Nuevo para probar Test MEU : OK
            // : base(_options) 
         {
                 
         }
         
-        public ProjectDbContext()     //Meu para probar bbdd
+        public ProjectDbContext()     //Meu para probar bbdd : OK
         {
 
         }
@@ -46,10 +46,10 @@ namespace Project.Lib.DAL.EFCore.Context
             => optionsBuilder.UseSqlite(DbConnection, b => b.MigrationsAssembly(AssemblyName));
 
 
-        internal bool ContainsKey(Guid id)  //Seguir Aquí !!!!
-        {
-            throw new NotImplementedException();
-        }
+        //internal bool ContainsKey(Guid id)  //Seguir Aquí !!!!...No utilizado. Existe método DbSetContainsKey en Generic Repository
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void ConfigureServices(IServiceCollection services)
         {
