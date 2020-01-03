@@ -14,19 +14,19 @@
             </TabItem>
             <TabItem Header="Subjects">
                 <controls:SubjectsView/>
-
             </TabItem>
+            <TabItem Header="Management">
+                <controls:ManagementView/>
+            </TabItem>
+
             <TabItem Header="Exams">
                 <controls:ExamsView/>
-
             </TabItem>
             <TabItem Header="Statistics">
                 <controls:StatisticsView/>
-
             </TabItem>
             <TabItem Header="Test">
                 <controls:TestView/>
-
             </TabItem>
             
 

@@ -69,3 +69,5 @@ C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netc
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.csproj.CopyComplete
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.dll
 C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netcoreapp3.1\ProjecteMVVMWPFNou.pdb
+C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netcoreapp3.1\Views\ManagementView.g.cs
+C:\Users\jordi\source\repos\ProjecteMVVMWPFNou\ProjecteMVVMWPFNou\obj\Debug\netcoreapp3.1\Views\ManagementView.baml

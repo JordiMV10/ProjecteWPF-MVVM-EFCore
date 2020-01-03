@@ -49,6 +49,18 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
+        private string _managementErrorVM;
+
+        public string ManagementErrorVM
+        {
+            get { return _managementErrorVM; }
+            set
+            {
+                _managementErrorVM = value;
+                OnPropertyChanged();
+            }
+        }
+
         public List<Student> Students
         {
             get
@@ -71,7 +83,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetStudentsCommand = new RouteCommand(GetStudents);
             DelStudentCommand = new RouteCommand(DelStudent);
             EditStudentCommand = new RouteCommand(EditStudent);
-
+            FindStudentCommand = new RouteCommand(FindStudent);
         }
 
         List<string> _errorsList;
@@ -153,6 +165,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
         public ICommand DelStudentCommand { get; set; } //Meu funciona OK
         public ICommand EditStudentCommand { get; set; }
+        public ICommand FindStudentCommand { get; set; }
 
         #endregion
 
@@ -197,7 +210,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
 
-        private void EditStudent()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
+        private void EditStudent()   //Meu : Funciona ok. 
         {
 
             var student = new Student();
@@ -210,6 +223,42 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             
         }
+
+        private void FindStudent()   //Meu : 
+        {
+
+            //var student = new Student();
+            //var dni = DniVM;
+            GetStudents();
+
+            // Producto product = listProduct.fisrtOrDefault(x => x.Id == 3);
+
+            CurrentStudent = StudentsListNou.FirstOrDefault(x => x.Dni == DniVM);
+
+            if (CurrentStudent !=null)
+            {
+                DniVM = CurrentStudent.Dni;
+                NameVM = CurrentStudent.Name;
+                ManagementErrorVM = "";
+            }
+
+            else
+            {
+                ManagementErrorVM = "Student no Existe";
+                DniVM = "";
+                NameVM = "";
+            }
+
+
+
+            //student = CurrentStudent;
+
+            //DniVM = CurrentStudent.Dni;
+            //NameVM = CurrentStudent.Name;
+
+
+        }
+
 
 
 
