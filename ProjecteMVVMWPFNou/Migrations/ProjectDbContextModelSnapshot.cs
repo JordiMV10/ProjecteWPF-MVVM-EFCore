@@ -52,6 +52,18 @@ namespace ProjecteMVVMWPFNou.Migrations
                     b.HasDiscriminator().HasValue("Student");
                 });
 
+            modelBuilder.Entity("Project.Lib.Models.StudentBySubject", b =>
+                {
+                    b.HasBaseType("Common.Lib.Core.Entity");
+
+                    b.Property<Guid?>("DniId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("DniId");
+
+                    b.HasDiscriminator().HasValue("StudentBySubject");
+                });
+
             modelBuilder.Entity("Project.Lib.Models.Subject", b =>
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
@@ -64,7 +76,26 @@ namespace ProjecteMVVMWPFNou.Migrations
                         .HasColumnName("Subject_Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("StudentBySubjectId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("StudentBySubjectId");
+
                     b.HasDiscriminator().HasValue("Subject");
+                });
+
+            modelBuilder.Entity("Project.Lib.Models.StudentBySubject", b =>
+                {
+                    b.HasOne("Project.Lib.Models.Student", "Dni")
+                        .WithMany()
+                        .HasForeignKey("DniId");
+                });
+
+            modelBuilder.Entity("Project.Lib.Models.Subject", b =>
+                {
+                    b.HasOne("Project.Lib.Models.StudentBySubject", null)
+                        .WithMany("SubjectsForStudent")
+                        .HasForeignKey("StudentBySubjectId");
                 });
 #pragma warning restore 612, 618
         }

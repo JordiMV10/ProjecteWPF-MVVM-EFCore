@@ -10,12 +10,6 @@ namespace Common.Lib.Infrastructure
         public bool IsSuccess { get; set; }
         public List<string> Errors { get; set; } = new List<string>();
 
-        public IQueryable<string> ErrorsQueryAll()   //Meu para probar lista errores en StudentsView. Puede borrarse
-        {
-            // return ProjectDbContext.Set<T>().AsQueryable();
-            return Errors.AsQueryable();
-        }
-
         public string AllErrors
         {
             get

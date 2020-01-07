@@ -49,19 +49,8 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
-        private string _managementErrorVM;
 
-        public string ManagementErrorVM
-        {
-            get { return _managementErrorVM; }
-            set
-            {
-                _managementErrorVM = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public List<Student> Students
+        public List<StudentsViewModel> Students
         {
             get
             {
@@ -73,7 +62,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
                 OnPropertyChanged();
             }
         }
-        List<Student> _students;
+        List<StudentsViewModel> _students;
 
 
         public StudentsViewModel()
@@ -83,12 +72,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetStudentsCommand = new RouteCommand(GetStudents);
             DelStudentCommand = new RouteCommand(DelStudent);
             EditStudentCommand = new RouteCommand(EditStudent);
-            FindStudentCommand = new RouteCommand(FindStudent);
         }
 
-        List<string> _errorsList;
+        List<ErrorMessage> _errorsList;
 
-        public List<string> ErrorsList
+        public List<ErrorMessage> ErrorsList
         {
             get
             {
@@ -101,6 +89,8 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
+        bool isEdit = false;
+
         public void SaveStudent()
         {
             Student student = new Student()
@@ -110,6 +100,9 @@ namespace ProjecteMVVMWPFNou.ViewModels
                 ChairNumber = ChairNumberVM,
 
             };
+
+            if (isEdit == false)
+                CurrentStudent = null;
 
             if (CurrentStudent != null)
                 student.Id = CurrentStudent.Id;
@@ -123,13 +116,15 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
 
             // ErrorsList = student.CurrentValidation.Errors;  //ES bo, enseña 2 la longitud de los 2 mensajes y no el texto
-            
-            ErrorsList = student.CurrentValidation.ErrorsQueryAll().ToList();
-            GetStudents();
 
+            ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+            GetStudents();
+            CurrentStudent = null;
             DniVM = "";
             NameVM = "";
             ChairNumberVM = 0;
+
+            isEdit = false;
         }
 
         public void GetStudents()
@@ -159,13 +154,14 @@ namespace ProjecteMVVMWPFNou.ViewModels
             }
         }
 
+
+
         #region Commands
         public ICommand SaveStudentCommand { get; set; }
         public ICommand GetStudentsCommand { get; set; }
 
         public ICommand DelStudentCommand { get; set; } //Meu funciona OK
         public ICommand EditStudentCommand { get; set; }
-        public ICommand FindStudentCommand { get; set; }
 
         #endregion
 
@@ -177,7 +173,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             set
             {
                 _currentStudent = value;
-                OnPropertyChanged("CurrentSubject");
+                OnPropertyChanged("CurrentStudent");
                 OnPropertyChanged("CanShowInfo");
             }
         }
@@ -191,7 +187,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             student.Delete();
 
-            ErrorsList = student.CurrentValidation.ErrorsQueryAll().ToList();
+            ErrorsList = student.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
 
             GetStudents();
@@ -221,43 +217,46 @@ namespace ProjecteMVVMWPFNou.ViewModels
             NameVM = CurrentStudent.Name;
             ChairNumberVM = CurrentStudent.ChairNumber;
 
-            
+            isEdit = true;
         }
 
-        private void FindStudent()   //Meu : 
-        {
+        //private void FindStudent()   //Meu : 
+        //{
 
-            //var student = new Student();
-            //var dni = DniVM;
-            GetStudents();
-
-            // Producto product = listProduct.fisrtOrDefault(x => x.Id == 3);
-
-            CurrentStudent = StudentsListNou.FirstOrDefault(x => x.Dni == DniVM);
-
-            if (CurrentStudent !=null)
-            {
-                DniVM = CurrentStudent.Dni;
-                NameVM = CurrentStudent.Name;
-                ManagementErrorVM = "";
-            }
-
-            else
-            {
-                ManagementErrorVM = "Student no Existe";
-                DniVM = "";
-                NameVM = "";
-            }
+        //    //var student = new Student();
+        //    //var dni = DniVM;
+        //    GetStudents();
 
 
+        //    CurrentStudent = StudentsListNou.FirstOrDefault(x => x.Dni == DniVM);
 
-            //student = CurrentStudent;
+        //    if (CurrentStudent !=null)
+        //    {
+        //        //ManagementViewModel managementViewModel = new ManagementViewModel();
+        //        //managementViewModel.CatchPropiertiesStudent(CurrentStudent);
+        //        DniVM = CurrentStudent.Dni;
+        //        NameVM = CurrentStudent.Name;
+        //        ManagementErrorVM = "";
+               
+        //    }
 
-            //DniVM = CurrentStudent.Dni;
-            //NameVM = CurrentStudent.Name;
+        //    else
+        //    {
+        //        ManagementErrorVM = "Student no Existe";
+        //        DniVM = "";
+        //        NameVM = "";
+                
+        //    }
 
 
-        }
+
+        //    //student = CurrentStudent;
+
+        //    //DniVM = CurrentStudent.Dni;
+        //    //NameVM = CurrentStudent.Name;
+
+
+        //}
 
 
 

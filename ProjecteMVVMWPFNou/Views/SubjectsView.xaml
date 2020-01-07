@@ -13,15 +13,10 @@
             <ViewModels:SubjectsViewModel/>
         </Grid.DataContext>
 
-
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-
 
         <Grid Grid.Row="0">
             <Button Height="30" Content="Guardar Asignatura" Command="{Binding SaveSubjectCommand }" RenderTransformOrigin="2.496,0.667" Margin="250,110,440,10" />
@@ -48,9 +43,6 @@
                 <DataGrid x:Name="SubjectsDataGrid" ItemsSource="{Binding SubjectList}" SelectedItem="{Binding CurrentSubject}" Margin="5,5,10,5" />
                 <Button Command="{Binding EditSubjectCommand}"  Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
                 <Button Command="{Binding DelSubjectCommand}" Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
-
-                <!--<Button Command="{Binding DataContext.VerInfo2Command, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}" CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"  Grid.Column="2" Content="Ver Info" Background="White"/>
-                <Button Command="{Binding DataContext.EliminarPersonaCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}}"  CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}" Grid.Column="3" Content="Eliminar" Background="White"/>-->
 
 
             </Grid>

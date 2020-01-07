@@ -27,19 +27,31 @@ namespace ProjecteMVVMWPFNou.Boot
             {
                 return new GenericRepository<Student>(dbContextConst());
             });
-            //var subjectsRepoBuilder = new Func<object[], object>((parameters) =>   //Original
-            //{
-            //    return new SubjectsRepository(dbContextConst());
-            //});
+            var subjectsRepoBuilder2 = new Func<object[], object>((parameters) =>   //Original
+            {
+                return new SubjectsRepository(dbContextConst());
+            });
             var subjectsRepoBuilder = new Func<object[], object>((parameters) =>   //meu
             {
                 return new GenericRepository<Subject>(dbContextConst());
             });
 
+            var studentBySubjectRepoBuilder = new Func<object[], object>((parameters) =>   //meu
+            {
+                return new GenericRepository<StudentBySubject>(dbContextConst());   //Meu
+            });
+            var studentRepoBuilder2 = new Func<object[], object>((parameters) =>   //meu
+            {
+                return new StudentsRepository(dbContextConst());
+            });
+
+
             dp.Register<IRepository<Student>, GenericRepository<Student>>(studentRepoBuilder);
             dp.Register<IRepository<Subject>, GenericRepository<Subject>>(subjectsRepoBuilder);  //meu
+            dp.Register<IRepository<StudentBySubject>, GenericRepository<StudentBySubject>>(studentBySubjectRepoBuilder);   //meu
             dp.Register<IRepository<Subject>, SubjectsRepository>(subjectsRepoBuilder); 
-            dp.Register<ISubjectsRepository, SubjectsRepository>(subjectsRepoBuilder);
+            dp.Register<ISubjectsRepository, SubjectsRepository>(subjectsRepoBuilder2);
+            dp.Register<IStudentsRepository, StudentsRepository>(studentRepoBuilder2);  //Meu
         }
     }
 }

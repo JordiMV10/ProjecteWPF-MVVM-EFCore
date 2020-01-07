@@ -34,10 +34,11 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
 
-
+        bool isEdit = false;
 
         public void SaveSubject()   //Meu : OK funciona
         {
+            
             Subject subject = new Subject()
             {
                 Name = SubjectNameVM,
@@ -46,17 +47,23 @@ namespace ProjecteMVVMWPFNou.ViewModels
             //subject = CurrentSubject;
             //subject.Name = SubjectNameVM;
 
+            if (isEdit == false)
+                CurrentSubject = null;
+
             if (CurrentSubject != null)
                 subject.Id = CurrentSubject.Id;
 
             subject.Save();
 
-            ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
+            // ErrorsList = subject.CurrentValidation.Errors;
+            ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
 
 
-            GetSubjects();    
 
+            GetSubjects();
+            CurrentSubject = null;  
             SubjectNameVM = "";
+            isEdit = false;
         }
 
         public void GetSubjects()    //Meu : OK funciona
@@ -95,9 +102,9 @@ namespace ProjecteMVVMWPFNou.ViewModels
         #endregion
 
 
-        List<string> _errorsList;
+        List<ErrorMessage> _errorsList;
 
-        public List<string> ErrorsList
+        public List<ErrorMessage> ErrorsList
         {
             get
             {
@@ -134,7 +141,8 @@ namespace ProjecteMVVMWPFNou.ViewModels
             
             subject.Delete();
 
-            ErrorsList = subject.CurrentValidation.ErrorsQueryAll().ToList();
+            ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
 
 
             GetSubjects();
@@ -168,11 +176,15 @@ namespace ProjecteMVVMWPFNou.ViewModels
         private void EditSubject()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
         {
             
-                var subject = new Subject();
+            var subject = new Subject();
 
-                subject = CurrentSubject;
+            subject = CurrentSubject;
 
-                SubjectNameVM = CurrentSubject.Name;
+            SubjectNameVM = CurrentSubject.Name;
+
+            // CurrentSubject = null;
+
+            isEdit = true;
         }
 
 

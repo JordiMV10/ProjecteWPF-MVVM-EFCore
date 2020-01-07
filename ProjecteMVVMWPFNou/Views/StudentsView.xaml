@@ -13,13 +13,10 @@
             <ViewModels:StudentsViewModel/>
         </Grid.DataContext>
 
-
-
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
 
 
         <Grid Grid.Row="0" DataContext="{Binding Mode=OneWay}">
@@ -34,8 +31,6 @@
                 <DataGrid ItemsSource="{Binding ErrorsList}" />
             </Grid>
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
-
-
 
 
         </Grid>

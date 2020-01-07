@@ -13,6 +13,8 @@ namespace Project.Lib.DAL.EFCore.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
+        public DbSet<StudentBySubject> StudentsBySubjects { get; set; }    //Meu
+
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options)
             : base(options)
         {
