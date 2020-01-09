@@ -18,7 +18,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             FindStudentCommand = new RouteCommand(FindStudent);
             GetSubjectsMGVMCommand = new RouteCommand(GetSubjectsMGVM);
             DelSubjectToListVMCommand = new RouteCommand(DelSubjectToListVM);
-
+            GetSubjectsToStudentVMCommand = new RouteCommand(GetSubjectsToStudent);
             //GetSubjectsCommand = new RouteCommand(GetSubjects);
             //DelSubjectCommand = new RouteCommand(DelSubject);
             //EditSubjectCommand = new RouteCommand(EditSubject);
@@ -78,6 +78,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public ICommand FindStudentCommand { get; set; }
         public ICommand GetSubjectsMGVMCommand { get; set; }
         public ICommand DelSubjectToListVMCommand { get; set; }
+        public ICommand GetSubjectsToStudentVMCommand { get; set; }
 
 
 
@@ -103,6 +104,18 @@ namespace ProjecteMVVMWPFNou.ViewModels
             set
             {
                 _currentSubjectMVM = value;
+                OnPropertyChanged("CurrentSubjectMVM");
+                OnPropertyChanged("CanShowInfo");
+            }
+        }
+
+        private StudentSubject _currentStudentSubjectMVM;
+        public StudentSubject CurrentStudentSubjectMVM  //Meu ok funciona !!
+        {
+            get { return _currentStudentSubjectMVM; }
+            set
+            {
+                _currentStudentSubjectMVM = value;
                 OnPropertyChanged("CurrentSubjectMVM");
                 OnPropertyChanged("CanShowInfo");
             }
@@ -155,23 +168,29 @@ namespace ProjecteMVVMWPFNou.ViewModels
             
         }
 
-        public void DelSubjectToListVM()
+        public void DelSubjectToListVM()   //MEU OK Funciona
         {
-            Subject subject = new Subject();
+            StudentSubject studentSubjectMVM = new StudentSubject();
+
+            studentSubjectMVM = CurrentStudentSubjectMVM;
+
+            studentSubjectMVM.Delete();
+
+            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+        }
+
+        public void GetSubjectsToStudent()  //MEU OK Funciona bien a nivel de ID's
+        {
             Student student = new Student();
             StudentSubject studentSubjectMVM = new StudentSubject();
 
-
-            subject = CurrentSubjectMVM;
             student = CurrentStudentMVM;
             studentSubjectMVM.StudentId = student.Id;
-            studentSubjectMVM.SubjectId = subject.Id;
 
-
+            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
         }
 
-
-        private void FindStudent()   //Meu : 
+        private void FindStudent()   //Meu : Funciona OK
         {
             var studentsVM = new StudentsViewModel();
             studentsVM.GetStudents();

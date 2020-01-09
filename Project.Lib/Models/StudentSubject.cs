@@ -28,6 +28,9 @@ namespace Project.Lib.Models
         }
 
 
+        
+
+
         public SaveResult<StudentSubject> Delete()  //MEU
         {
             var saveResult = base.Delete<StudentSubject>();
