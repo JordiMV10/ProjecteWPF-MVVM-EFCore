@@ -52,16 +52,21 @@ namespace ProjecteMVVMWPFNou.Migrations
                     b.HasDiscriminator().HasValue("Student");
                 });
 
-            modelBuilder.Entity("Project.Lib.Models.StudentBySubject", b =>
+            modelBuilder.Entity("Project.Lib.Models.StudentSubject", b =>
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
 
-                    b.Property<Guid?>("DniId")
+                    b.Property<Guid>("StudentId")
                         .HasColumnType("TEXT");
 
-                    b.HasIndex("DniId");
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("StudentBySubject");
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasDiscriminator().HasValue("StudentSubject");
                 });
 
             modelBuilder.Entity("Project.Lib.Models.Subject", b =>
@@ -76,26 +81,22 @@ namespace ProjecteMVVMWPFNou.Migrations
                         .HasColumnName("Subject_Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("StudentBySubjectId")
-                        .HasColumnType("TEXT");
-
-                    b.HasIndex("StudentBySubjectId");
-
                     b.HasDiscriminator().HasValue("Subject");
                 });
 
-            modelBuilder.Entity("Project.Lib.Models.StudentBySubject", b =>
+            modelBuilder.Entity("Project.Lib.Models.StudentSubject", b =>
                 {
-                    b.HasOne("Project.Lib.Models.Student", "Dni")
+                    b.HasOne("Project.Lib.Models.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("DniId");
-                });
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("Project.Lib.Models.Subject", b =>
-                {
-                    b.HasOne("Project.Lib.Models.StudentBySubject", null)
-                        .WithMany("SubjectsForStudent")
-                        .HasForeignKey("StudentBySubjectId");
+                    b.HasOne("Project.Lib.Models.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

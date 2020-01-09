@@ -17,7 +17,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             AddSubjectToListVMCommand = new RouteCommand(AddSubjectToListVM);
             FindStudentCommand = new RouteCommand(FindStudent);
             GetSubjectsMGVMCommand = new RouteCommand(GetSubjectsMGVM);
-
+            DelSubjectToListVMCommand = new RouteCommand(DelSubjectToListVM);
 
             //GetSubjectsCommand = new RouteCommand(GetSubjects);
             //DelSubjectCommand = new RouteCommand(DelSubject);
@@ -77,6 +77,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         public ICommand AddSubjectToListVMCommand { get; set; }
         public ICommand FindStudentCommand { get; set; }
         public ICommand GetSubjectsMGVMCommand { get; set; }
+        public ICommand DelSubjectToListVMCommand { get; set; }
 
 
 
@@ -120,39 +121,52 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
         public void AddSubjectToListVM()
         {
-            //CurrentSubjectMVM.Name = SubjectNameMGVM;
-            //CurrentStudentMVM.Dni = DniMGVM;
-            //CurrentStudentMVM.Name = NameMGVM;
             Subject subject = new Subject();
             Student student = new Student();
+            StudentSubject studentSubjectMVM = new StudentSubject();
+
 
             subject = CurrentSubjectMVM;
             student = CurrentStudentMVM;
-            
+            studentSubjectMVM.StudentId = student.Id;
+            studentSubjectMVM.SubjectId = subject.Id;
+            ManagementErrorMGVM = "";
 
-            //StudentsViewModel studentMVM = new StudentsViewModel();
-            //SubjectsViewModel subjectMVM = new SubjectsViewModel();
-
-            StudentBySubject studentBySubjectMVM = new StudentBySubject();
-            //Subject subject = new Subject();
-
-            // CurrentStudentMVM.Dni = DniMGVM;
-            //CurrentSubjectMVM.Name = subjectMVM.SubjectNameVM;
-            //subject = CurrentSubjectMVM;
-            //string name = subject.Name;
-
-            var error = studentBySubjectMVM.AddSubjectsToList(subject);
-
-            if (error != null)
+            SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+            if (SubjectsByStudentList != null && SubjectsByStudentList.Any(x => x.SubjectId == subject.Id)) 
             {
-                ManagementErrorMGVM = error;
+                    ManagementErrorMGVM = "El alumno ya tiene la asignatura";
             }
+               
             else
             {
-                var repo = StudentBySubject.DepCon.Resolve<IRepository<StudentBySubject>>();
-               // SubjectsByStudentList = repo.QueryAll().ToList();  // Quitada por errores. Solucionar !!
+                var error = studentSubjectMVM.Save();
 
+                if (error.IsSuccess == false)
+                {
+                    ManagementErrorMGVM = error.ToString();
+                }
+                else
+                {
+                    var repo = StudentSubject.DepCon.Resolve<IRepository<StudentSubject>>();
+                    SubjectsByStudentList = studentSubjectMVM.StudentBySubjects(studentSubjectMVM.StudentId);
+                }
             }
+            
+        }
+
+        public void DelSubjectToListVM()
+        {
+            Subject subject = new Subject();
+            Student student = new Student();
+            StudentSubject studentSubjectMVM = new StudentSubject();
+
+
+            subject = CurrentSubjectMVM;
+            student = CurrentStudentMVM;
+            studentSubjectMVM.StudentId = student.Id;
+            studentSubjectMVM.SubjectId = subject.Id;
+
 
         }
 
@@ -211,8 +225,8 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
 
 
-        List<Subject> _subjectsByStudentList;
-        public List<Subject> SubjectsByStudentList  //Meu 
+        List<StudentSubject> _subjectsByStudentList;
+        public List<StudentSubject> SubjectsByStudentList  //Meu 
         {
             get
             {
@@ -224,7 +238,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
                 if (value != null && value.Count > 0)  //Nou
                 {
-                    CurrentSubjectMVM = value[0];          //Nou
+                   //  CurrentSubjectMVM = value[0];          //Nou  OJO REvisar, se ha quitado pq da errores
                 }                                       //Nou
                 OnPropertyChanged();
             }

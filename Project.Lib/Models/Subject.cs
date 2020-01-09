@@ -15,6 +15,9 @@ namespace Project.Lib.Models
 
         public Guid Guid { get; private set; }
 
+       //  public IList<StudentSubject> StudentSubjects { get; set; }
+
+
         public SaveResult<Subject> Save()
         {
             var saveResult = base.Save<Subject>();

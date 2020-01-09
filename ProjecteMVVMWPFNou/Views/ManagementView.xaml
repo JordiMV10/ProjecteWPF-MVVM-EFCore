@@ -48,8 +48,8 @@
         </Grid>
 
         <Grid Background="#FFE5E5E5" Grid.Row="5" Grid.Column="1"  Margin="0,28,85,5" Grid.RowSpan="3">
-            <DataGrid x:Name="SubjectsToStudentMGVMDataGrid" ItemsSource="{Binding SubjectsByStudentList}" SelectedItem="{Binding CurrentSubjectMVM}" Margin="5,5,10,20" />
-            <Button Content="Borrar Asignatura" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom" RenderTransformOrigin="0.379,-0.251" FontSize="10" Width="130"/>
+            <DataGrid x:Name="SubjectsToStudentMGVMDataGrid" ItemsSource="{Binding SubjectsByStudentList}" SelectedItem="{Binding CurrentSubjectMVM}"  Margin="5,5,10,20" />
+            <Button Content="Borrar Asignatura" Command="{Binding DelSubjectToListVMCommand}"   Grid.Row="7" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Bottom" RenderTransformOrigin="0.379,-0.251" FontSize="10" Width="130"/>
         </Grid>
 
 

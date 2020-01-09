@@ -13,7 +13,7 @@ namespace Project.Lib.DAL.EFCore.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
-        public DbSet<StudentBySubject> StudentsBySubjects { get; set; }    //Meu
+        public DbSet<StudentSubject> StudentSubjects { get; set; }    //Meu
 
         public ProjectDbContext(DbContextOptions<ProjectDbContext> options)
             : base(options)
@@ -37,6 +37,23 @@ namespace Project.Lib.DAL.EFCore.Context
 
             builder.Entity<Entity>()
                 .Ignore(x => x.CurrentValidation);
+
+            //OJO aqui es nou
+
+            //builder.Entity<StudentSubject>()
+            //.HasKey(t => new { t.StudentId, t.SubjectId });
+
+            //builder.Entity<StudentSubject>()
+            //    .HasOne(pt => pt.Student)
+            //    .WithMany(p => p.StudentSubjects)   //Valido si creo una lista de StudentSubject llamada StudentSubjects en Student
+            //    .HasForeignKey(pt => pt.StudentId);
+
+            //builder.Entity<StudentSubject>()
+            //    .HasOne(pt => pt.Subject)
+            //    .WithMany(t => t.StudentSubjects) //Valido si creo una lista de StudentSubject llamada StudentSubjects en Subject
+            //    .HasForeignKey(pt => pt.SubjectId);
+
+
         }
 
         static string DbConnection = "Data Source=C:\\Users\\jordi\\source\\repos\\ProjecteMVVMWPFNou\\ProjecteMVVMWPFNou\\ProjecteFinalMVVM2.db";
