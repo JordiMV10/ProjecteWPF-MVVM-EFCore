@@ -52,10 +52,10 @@ namespace Project.Lib.DAL.EFCore
             return output;
         }
 
-        public T Find(Guid id)
+        public T Find(Guid id)   //Funciona OK !!
         {
 
-            return _dbContext.Set<T>().Find(id); //Verificar que es ok!
+            return _dbContext.Set<T>().Find(id); 
 
         }
 
@@ -64,10 +64,6 @@ namespace Project.Lib.DAL.EFCore
             return DbSet.AsQueryable();
         }
 
-        //public virtual SaveResult<T> Update(T entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
 
 
@@ -127,13 +123,7 @@ namespace Project.Lib.DAL.EFCore
 
         public bool DbSetContainsKey(Guid id)  //Meu funciona OK
         {
-            //var entityWithId = QueryAll().FirstOrDefault(s => s.Id == id);   //Funciona, pero parece mejor para Find(id)
-            //if (entityWithId != null)
-            //    return true;
-            //else
-            //    return false;
-
-            if (DbSet.Any(x => x.Id == id))  //Funciona y es rápido.
+            if (DbSet.Any(x => x.Id == id))  
                 return true;
             else
                 return false;
