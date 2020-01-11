@@ -9,7 +9,7 @@ using Project.Lib.DAL.EFCore.Context;
 namespace ProjecteMVVMWPFNou.Migrations
 {
     [DbContext(typeof(ProjectDbContext))]
-    [Migration("20200108175003_initialCreate")]
+    [Migration("20200111110527_initialCreate")]
     partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,27 @@ namespace ProjecteMVVMWPFNou.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Entity");
                 });
 
+            modelBuilder.Entity("Project.Lib.Models.Exam", b =>
+                {
+                    b.HasBaseType("Common.Lib.Core.Entity");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasDiscriminator().HasValue("Exam");
+                });
+
             modelBuilder.Entity("Project.Lib.Models.Student", b =>
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
@@ -54,19 +75,40 @@ namespace ProjecteMVVMWPFNou.Migrations
                     b.HasDiscriminator().HasValue("Student");
                 });
 
+            modelBuilder.Entity("Project.Lib.Models.StudentExam", b =>
+                {
+                    b.HasBaseType("Common.Lib.Core.Entity");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("HasCheated")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Mark")
+                        .HasColumnType("REAL");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("TEXT");
+
+                    b.HasIndex("ExamId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasDiscriminator().HasValue("StudentExam");
+                });
+
             modelBuilder.Entity("Project.Lib.Models.StudentSubject", b =>
                 {
                     b.HasBaseType("Common.Lib.Core.Entity");
 
                     b.Property<Guid>("StudentId")
+                        .HasColumnName("StudentSubject_StudentId")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("SubjectId")
+                        .HasColumnName("StudentSubject_SubjectId")
                         .HasColumnType("TEXT");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("SubjectId");
 
                     b.HasDiscriminator().HasValue("StudentSubject");
                 });
@@ -86,17 +128,26 @@ namespace ProjecteMVVMWPFNou.Migrations
                     b.HasDiscriminator().HasValue("Subject");
                 });
 
-            modelBuilder.Entity("Project.Lib.Models.StudentSubject", b =>
+            modelBuilder.Entity("Project.Lib.Models.Exam", b =>
                 {
-                    b.HasOne("Project.Lib.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Project.Lib.Models.Subject", "Subject")
                         .WithMany()
                         .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Project.Lib.Models.StudentExam", b =>
+                {
+                    b.HasOne("Project.Lib.Models.Exam", "Exam")
+                        .WithMany()
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Project.Lib.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
