@@ -15,12 +15,15 @@
             <TabItem Header="Subjects">
                 <controls:SubjectsView/>
             </TabItem>
-            <TabItem Header="Management">
+            <TabItem Header="StudentSubjects">
                 <controls:ManagementView/>
             </TabItem>
 
             <TabItem Header="Exams">
                 <controls:ExamsView/>
+            </TabItem>
+            <TabItem Header="StudentExams">
+                <controls:StudentExamsView/>
             </TabItem>
             <TabItem Header="Statistics">
                 <controls:StatisticsView/>
