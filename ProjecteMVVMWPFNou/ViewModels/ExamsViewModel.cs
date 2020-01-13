@@ -16,7 +16,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetSubjectsEVCommand = new RouteCommand(GetSubjectsEV);
             GetSubjectsNameEVCommand = new RouteCommand(GetSubjectsNameEV);
             SaveExamEVCommand = new RouteCommand(SaveExam);
-
+            DateEVM = DateTime.Now;
         }
 
         public ICommand GetSubjectsEVCommand { get; set; }
@@ -163,6 +163,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         {
             SubjectsNameListEV = GetSubjectsByNameEV();
         }
+
 
         public void SaveExam()
         {

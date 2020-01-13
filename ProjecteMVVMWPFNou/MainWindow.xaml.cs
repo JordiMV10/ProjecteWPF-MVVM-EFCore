@@ -17,7 +17,6 @@ namespace ProjecteMVVMWPFNou
         public MainWindow()
         {
             var bootstrapper = new Bootstrapper();
-
             
             //var dbConnection = ConfigurationManager.ConnectionStrings["ProjecteMVVMDb"].ConnectionString;
             var dbConnection = ConfigurationManager.ConnectionStrings["ProjecteMVVMDb"].ConnectionString;
@@ -40,9 +39,6 @@ namespace ProjecteMVVMWPFNou
                 // return new ProjectDbContext();
             });
             return dbContextConst;
-
-
-
 
             //using (var dbContext = new ProjectDbContext(optionsBuilder.Options))
             //{

@@ -31,7 +31,8 @@
 
             <TextBox x:Name="TitleText" Text="{Binding TitleEVM}" HorizontalAlignment="Left" Height="23" Margin="125,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.292,0.209"/>
             <TextBox x:Name="TextText"  Text="{Binding TextEVM}" HorizontalAlignment="Left" Height="23" Margin="125,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
-            <TextBox x:Name="DateText" Text="{Binding DateEVM}" HorizontalAlignment="Left" Height="23" Margin="125,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.668,0.443"/>
+            <!--<TextBox x:Name="DateText"  HorizontalAlignment="Left" Height="23" Margin="125,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.668,0.443"/>-->
+            <DatePicker Margin="125,73,480,54" FirstDayOfWeek="Monday" SelectedDate="{Binding DateEVM}"/>
             <ComboBox x:Name="ComboBoxSubjects"  HorizontalAlignment="Left" Margin="125,100,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding SubjectsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentSubjectNameEVM}" />
             <Button Content="REFRESH" Command="{Binding GetSubjectsNameEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="330,100,375,28" />
 
