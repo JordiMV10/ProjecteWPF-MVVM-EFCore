@@ -41,7 +41,7 @@
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
 
             <Grid Margin="480,24,10,10" Background="#FFBDC0CB">
-                <DataGrid ItemsSource="{Binding ErrorsList}" />
+                <DataGrid ItemsSource="{Binding ErrorsListEV}" />
             </Grid>
 
         </Grid>
@@ -60,7 +60,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <DataGrid x:Name="ExamsDataGrid" Grid.Column="0" ItemsSource="{Binding SubjectsListEV}"  Margin="5,5,5,5" />
+            <DataGrid x:Name="ExamsDataGrid" Grid.Column="0" ItemsSource="{Binding ExamsListEV}" SelectedItem="{Binding CurrentExamEV}" Margin="5,5,5,5" />
             <Button   Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
             <Button  Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
             <!--<Button Content="Get Exams" Command="{Binding GetSubjectsEVM2Command}" Width="151" Margin="0,255,10,5" HorizontalAlignment="Right" RenderTransformOrigin="0.602,2.571" />-->
@@ -69,7 +69,7 @@
 
 
         <Grid Grid.Row="2">
-            <Button Content="Get Subjects" Command="{Binding GetSubjectsEVCommand}" Width="100" Margin="0,5,60,5" HorizontalAlignment="Right" RenderTransformOrigin="0.9,3.5" />
+            <Button Content="Get Exams" Command="{Binding GetExamsEVCommand}" Width="100" Margin="0,5,60,5" HorizontalAlignment="Right" RenderTransformOrigin="0.9,3.5" />
 
         </Grid>
 

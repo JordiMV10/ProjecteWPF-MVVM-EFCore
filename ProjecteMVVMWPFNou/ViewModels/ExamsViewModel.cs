@@ -15,13 +15,15 @@ namespace ProjecteMVVMWPFNou.ViewModels
         {
             GetSubjectsEVCommand = new RouteCommand(GetSubjectsEV);
             GetSubjectsNameEVCommand = new RouteCommand(GetSubjectsNameEV);
-            SaveExamEVCommand = new RouteCommand(SaveExam);
+            SaveExamEVCommand = new RouteCommand(SaveExamEV);
+            GetExamsEVCommand = new RouteCommand(GetExamsEV);
             DateEVM = DateTime.Now;
         }
 
         public ICommand GetSubjectsEVCommand { get; set; }
         public ICommand GetSubjectsNameEVCommand { get; set; }
         public ICommand SaveExamEVCommand { get; set; }
+        public ICommand GetExamsEVCommand { get; set; }
 
 
 
@@ -135,8 +137,46 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
         }
 
+        private Exam _currentExamEV;
+        public Exam CurrentExamEV  
+        {
+            get { return _currentExamEV; }
+            set
+            {
+                _currentExamEV = value;
+                OnPropertyChanged("CurrentExam");
+                OnPropertyChanged("CanShowInfo");
+            }
+        }
 
+        List<ErrorMessage> _errorsListEV;
 
+        public List<ErrorMessage> ErrorsListEV
+        {
+            get
+            {
+                return _errorsListEV;
+            }
+            set
+            {
+                _errorsListEV = value;
+                OnPropertyChanged();
+            }
+        }
+
+        List<Exam> _examsListEV;
+        public List<Exam> ExamsListEV
+        {
+            get
+            {
+                return _examsListEV;
+            }
+            set
+            {
+                _examsListEV = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public void GetSubjectsEV()  //NO TOCAR
@@ -164,18 +204,47 @@ namespace ProjecteMVVMWPFNou.ViewModels
             SubjectsNameListEV = GetSubjectsByNameEV();
         }
 
-
-        public void SaveExam()
+        bool isEdit = false;
+        public void SaveExamEV()  //OK Funciona bien !!
         {
             Exam exam = new Exam();
             Subject subject = new Subject();
 
+            exam = SaveExamNameEV(CurrentSubjectNameEVM); 
 
-            exam = SaveExamNameEV(CurrentSubjectNameEVM);  // Hasta aquí funciona Bien. Tengo objeto Exam completo. pdte.SAVE!!
+            if (isEdit == false)
+                CurrentExamEV = null;
 
-            /// PDTE exam.Save();
+            if (CurrentExamEV != null)
+                exam.Id = CurrentExamEV.Id;
+
+            exam.Save();
+
+
+            ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+            GetExamsEV();
+            CurrentExamEV = null;
+            TitleEVM = "";
+            TextEVM = "";
+            DateEVM = DateTime.Now;
+            subject = null;
+
+            isEdit = false;
+
+
 
         }
+
+        public void GetExamsEV()  //OK Funciona bien
+        {
+
+            Exam exam = new Exam();
+            var repo = Student.DepCon.Resolve<IRepository<Exam>>();
+            ExamsListEV = repo.QueryAll().ToList();
+
+        }
+
+
         public Exam SaveExamNameEV(string name)   //Meu : Funciona OK !! Me devuelve exam completo!! .
         {
             Subject subject = new Subject();
@@ -190,30 +259,6 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             return exam;
 
-            //{
-            //    Name = CurrentSubjectEVM.Name,
-
-            //};
-            ////subject.Name = SubjectNameVM;
-
-            //if (isEdit == false)
-            //    CurrentSubject = null;
-
-            //if (CurrentSubject != null)
-            //    subject.Id = CurrentSubject.Id;
-
-            // subject.Save();
-
-
-            //// ErrorsList = subject.CurrentValidation.Errors;
-            //ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
-
-
-
-            //GetSubjects();
-            //CurrentSubject = null;
-            //SubjectNameVM = "";
-            //isEdit = false;
         }
 
     }
