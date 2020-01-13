@@ -32,11 +32,11 @@
             <TextBox x:Name="TitleText" Text="{Binding TitleEVM}" HorizontalAlignment="Left" Height="23" Margin="125,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.292,0.209"/>
             <TextBox x:Name="TextText"  Text="{Binding TextEVM}" HorizontalAlignment="Left" Height="23" Margin="125,40,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195"/>
             <!--<TextBox x:Name="DateText"  HorizontalAlignment="Left" Height="23" Margin="125,70,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="195" RenderTransformOrigin="0.668,0.443"/>-->
-            <DatePicker Margin="125,73,480,54" FirstDayOfWeek="Monday" SelectedDate="{Binding DateEVM}"/>
+            <DatePicker Margin="125,73,445,54" FirstDayOfWeek="Monday" SelectedDate="{Binding DateEVM}"/>
             <ComboBox x:Name="ComboBoxSubjects"  HorizontalAlignment="Left" Margin="125,100,0,0" VerticalAlignment="Top" Width="195" ItemsSource="{Binding SubjectsNameListEV}" DataContext="{Binding Mode=OneWay}" SelectedItem="{Binding CurrentSubjectNameEVM}" />
             <Button Content="REFRESH" Command="{Binding GetSubjectsNameEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="330,100,375,28" />
 
-            <Button Height="30" Content="Save Exam" Command="{Binding SaveExamEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,21,345,99" />
+            <Button Content="Save Exam" Command="{Binding SaveExamEVCommand}" RenderTransformOrigin="2.496,0.667" Margin="345,13,345,87" />
 
             <Label Content="Lista de Errores" HorizontalAlignment="Left" Margin="590,3,0,0" VerticalAlignment="Top" Width="130" FontWeight="Normal" FontStyle="Italic"/>
 
@@ -61,11 +61,11 @@
             </Grid.ColumnDefinitions>
 
             <DataGrid x:Name="ExamsDataGrid" Grid.Column="0" ItemsSource="{Binding ExamsListEV}" SelectedItem="{Binding CurrentExamEV}" Margin="5,5,5,5" />
-            <Button   Grid.Column="1" Content="Editar" Background="White" Margin="0,5,10,140" />
-            <Button  Grid.Column="1" Content="Eliminar" Background="White" Margin="0,140,10,5"/>
+            <Button   Grid.Column="1" Content="Editar" Command="{Binding EditExamEVCommand}" Background="White" Margin="0,5,10,140" />
+            <Button  Grid.Column="1" Content="Eliminar" Command="{Binding DelExamEVCommand}" Background="White" Margin="0,140,10,5"/>
             <!--<Button Content="Get Exams" Command="{Binding GetSubjectsEVM2Command}" Width="151" Margin="0,255,10,5" HorizontalAlignment="Right" RenderTransformOrigin="0.602,2.571" />-->
 
-        </Grid> 
+        </Grid>
 
 
         <Grid Grid.Row="2">

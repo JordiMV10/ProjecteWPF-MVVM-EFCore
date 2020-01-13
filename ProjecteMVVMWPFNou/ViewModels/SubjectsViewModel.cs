@@ -173,7 +173,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
 
-        private void EditSubject()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
+        public void EditSubject()   //Meu : Funciona ok. Recupera currentSubject y lo pone en la textBox. Pdte.Ajustar el salvado
         {
             
             var subject = new Subject();

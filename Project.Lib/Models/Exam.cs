@@ -35,14 +35,14 @@ namespace Project.Lib.Models
         public Guid SubjectId { get; set; }
 
 
-        public SaveResult<Exam> Save()
+        public SaveResult<Exam> Save() // OK Funciona
         {
             var saveResult = base.Save<Exam>();
 
             return saveResult;
         }
 
-        public SaveResult<Exam> Delete()  //MEU
+        public SaveResult<Exam> Delete()  //OK Funciona
         {
             var saveResult = base.Delete<Exam>();
 
@@ -161,11 +161,6 @@ namespace Project.Lib.Models
 
             return output;
         }
-
-
-
-
-
 
     }
 }

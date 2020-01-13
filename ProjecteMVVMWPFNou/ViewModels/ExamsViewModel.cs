@@ -17,13 +17,19 @@ namespace ProjecteMVVMWPFNou.ViewModels
             GetSubjectsNameEVCommand = new RouteCommand(GetSubjectsNameEV);
             SaveExamEVCommand = new RouteCommand(SaveExamEV);
             GetExamsEVCommand = new RouteCommand(GetExamsEV);
+            DelExamEVCommand = new RouteCommand(DelExamEV);
+            EditExamEVCommand = new RouteCommand(EditExamEV);
+
             DateEVM = DateTime.Now;
+            
         }
 
         public ICommand GetSubjectsEVCommand { get; set; }
         public ICommand GetSubjectsNameEVCommand { get; set; }
         public ICommand SaveExamEVCommand { get; set; }
         public ICommand GetExamsEVCommand { get; set; }
+        public ICommand DelExamEVCommand { get; set; }
+        public ICommand EditExamEVCommand { get; set; }
 
 
 
@@ -88,8 +94,6 @@ namespace ProjecteMVVMWPFNou.ViewModels
                 OnPropertyChanged();
             }
         }
-
-
 
 
         private Subject _currentSubjectEVM;
@@ -220,7 +224,6 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             exam.Save();
 
-
             ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
             GetExamsEV();
             CurrentExamEV = null;
@@ -231,17 +234,13 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             isEdit = false;
 
-
-
         }
 
         public void GetExamsEV()  //OK Funciona bien
         {
-
             Exam exam = new Exam();
             var repo = Student.DepCon.Resolve<IRepository<Exam>>();
             ExamsListEV = repo.QueryAll().ToList();
-
         }
 
 
@@ -259,6 +258,42 @@ namespace ProjecteMVVMWPFNou.ViewModels
 
             return exam;
 
+        }
+
+        public void DelExamEV()    //Meu : Funciona OK !!
+        {
+            Exam exam = new Exam();
+
+            exam = CurrentExamEV;
+
+            exam.Delete();
+
+            ErrorsListEV = exam.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+
+            GetExamsEV();
+
+            TitleEVM = "";
+            TextEVM = "";
+            DateEVM = DateTime.Now;
+
+        }
+
+        public void EditExamEV()   //Meu : Funciona ok. 
+        {
+
+            Exam exam = new Exam();
+
+            exam = CurrentExamEV;
+
+            Subject subject = new Subject();
+
+            TitleEVM = CurrentExamEV.Title;
+            TextEVM = CurrentExamEV.Text;
+            DateEVM = CurrentExamEV.Date;
+            CurrentSubjectNameEVM = CurrentExamEV.Subject.Name;
+
+            isEdit = true;
         }
 
     }

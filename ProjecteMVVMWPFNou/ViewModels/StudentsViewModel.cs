@@ -206,7 +206,7 @@ namespace ProjecteMVVMWPFNou.ViewModels
         }
 
 
-        private void EditStudent()   //Meu : Funciona ok. 
+        public void EditStudent()   //Meu : Funciona ok. 
         {
 
             var student = new Student();
