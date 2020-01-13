@@ -13,91 +13,207 @@ namespace ProjecteMVVMWPFNou.ViewModels
     {
         public ExamsViewModel()
         {
-            // RefreshEVMCommand = new RouteCommand(RefreshEVM);
+            GetSubjectsEVCommand = new RouteCommand(GetSubjectsEV);
+            GetSubjectsNameEVCommand = new RouteCommand(GetSubjectsNameEV);
+            SaveExamEVCommand = new RouteCommand(SaveExam);
+
         }
 
-        // public ICommand RefreshEVMCommand { get; set; }
+        public ICommand GetSubjectsEVCommand { get; set; }
+        public ICommand GetSubjectsNameEVCommand { get; set; }
+        public ICommand SaveExamEVCommand { get; set; }
 
 
-        //public void RefreshEVM()
-        //{
-        //    GetSubjectsEVM();
-        //}
 
-        public List<string> GetSubjectsEVM()  //OK Funciona.
+        private string _titleEVM;
+
+        public string TitleEVM
         {
-            var subject = new Subject();
+            get
+            {
+                return _titleEVM;
+            }
+            set
+            {
+                _titleEVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _textEVM;
+
+        public string TextEVM
+        {
+            get
+            {
+                return _textEVM;
+            }
+            set
+            {
+                _textEVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _currentSubjectNameEVM;
+
+
+        public string CurrentSubjectNameEVM
+        {
+            get
+            {
+                return _currentSubjectNameEVM;
+            }
+            set
+            {
+                _currentSubjectNameEVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private DateTime _dateEVM;
+
+        public DateTime DateEVM
+        {
+            get
+            {
+                return _dateEVM;
+            }
+            set
+            {
+                _dateEVM = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+
+
+        private Subject _currentSubjectEVM;
+        public Subject CurrentSubjectEVM  //Meu ok funciona !!
+        {
+            get { return _currentSubjectEVM; }
+            set
+            {
+                _currentSubjectEVM = value;
+                OnPropertyChanged("CurrentSubjectEVM");
+                OnPropertyChanged("CanShowInfo");
+            }
+        }
+
+
+
+        List<Subject> _subjectsListEV;
+        public List<Subject> SubjectsListEV
+        {
+            get
+            {
+                return _subjectsListEV;
+            }
+            set
+            {
+                _subjectsListEV = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
+        List<string> _subjectsNameListEV;
+        public List<string> SubjectsNameListEV
+        {
+            get
+            {
+                return _subjectsNameListEV;
+            }
+            set
+            {
+                _subjectsNameListEV = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+
+
+
+
+        public void GetSubjectsEV()  //NO TOCAR
+        {
             var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-            SubjectsListEVM = repo.QueryAll().ToList();
-            List<string> SubjectsByNameListEVM = new List<string>();
-            foreach (Subject subj in SubjectsListEVM)
+            SubjectsListEV = repo.QueryAll().ToList();
+        }
+
+
+        public List<string> GetSubjectsByNameEV()  //NO TOCAR
+        {
+            GetSubjectsEV();
+            List<string> SubjectsNameListEV = new List<string>();
+            foreach (Subject subj in SubjectsListEV)
             {
                 var name = subj.Name;
-                SubjectsByNameListEVM.Add(name);
+                SubjectsNameListEV.Add(name);
             }
-            return SubjectsByNameListEVM;
+            return SubjectsNameListEV;
         }
 
-        //public void GetSubjectsEVM2()  //OK Funciona. Revisar XAML pq no aparece la info
-        //{
-        //    var subject = new Subject();
-        //    SubjectNameEVM = subject.Name;
-        //    var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
-        //    SubjectsListEVM = repo.QueryAll().ToList();
-        //    SubjectNameEVM = subject.Name;
 
-        //    List<string> SubjectsByNameListEVM = new List<string>();
-        //    foreach (Subject subj in SubjectsListEVM)
-        //    {
-        //        var name = subj.Name;
-        //        SubjectsByNameListEVM.Add(name);
-        //    }
-
-        //}
-
-
-        //private string _subjectNameEVM;
-
-        //public string SubjectNameEVM
-        //{
-        //    get { return _subjectNameEVM; }
-        //    set
-        //    {
-        //        _subjectNameEVM = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-
-
-        List<Subject> _subjectsListEVM;
-        public List<Subject> SubjectsListEVM  //Meu : OK funciona
+        public void GetSubjectsNameEV()  //OK Funciona No tocar !!!!
         {
-            get
-            {
-                return _subjectsListEVM;
-            }
-            set
-            {
-                _subjectsListEVM = value;
-
-                OnPropertyChanged();
-            }
+            SubjectsNameListEV = GetSubjectsByNameEV();
         }
 
-
-        List<string> _subjectsByNameListEVM;
-        public List<string> SubjectsByNameListEVM  //Meu : OK funciona
+        public void SaveExam()
         {
-            get
-            {
-                return _subjectsByNameListEVM;
-            }
-            set
-            {
-                _subjectsByNameListEVM = value;
+            Exam exam = new Exam();
+            Subject subject = new Subject();
 
-                OnPropertyChanged();
-            }
+
+            exam = SaveExamNameEV(CurrentSubjectNameEVM);  // Hasta aquí funciona Bien. Tengo objeto Exam completo. pdte.SAVE!!
+
+            /// PDTE exam.Save();
+
         }
+        public Exam SaveExamNameEV(string name)   //Meu : Funciona OK !! Me devuelve exam completo!! .
+        {
+            Subject subject = new Subject();
+            var repo = Subject.DepCon.Resolve<IRepository<Subject>>();
+            subject = repo.QueryAll().FirstOrDefault(s => s.Name == name);   //Funciona bien, recupero bien el subject
+
+            Exam exam = new Exam();
+            exam.SubjectId = subject.Id;
+            exam.Title = TitleEVM;
+            exam.Text = TextEVM;
+            exam.Date = DateEVM;
+
+            return exam;
+
+            //{
+            //    Name = CurrentSubjectEVM.Name,
+
+            //};
+            ////subject.Name = SubjectNameVM;
+
+            //if (isEdit == false)
+            //    CurrentSubject = null;
+
+            //if (CurrentSubject != null)
+            //    subject.Id = CurrentSubject.Id;
+
+            // subject.Save();
+
+
+            //// ErrorsList = subject.CurrentValidation.Errors;
+            //ErrorsList = subject.CurrentValidation.Errors.Select(x => new ErrorMessage() { Message = x }).ToList();
+
+
+
+            //GetSubjects();
+            //CurrentSubject = null;
+            //SubjectNameVM = "";
+            //isEdit = false;
+        }
+
     }
 }

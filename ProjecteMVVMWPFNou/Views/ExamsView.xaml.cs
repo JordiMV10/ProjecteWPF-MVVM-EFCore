@@ -25,20 +25,9 @@ namespace ProjecteMVVMWPFNou.Views
         public ExamsView()
         {
             InitializeComponent();
-
-            ExamsViewModel examsVM = new ExamsViewModel();
-            ComboBoxSubjects.ItemsSource = examsVM.GetSubjectsEVM(); 
+            
+            this.DataContext = new ExamsViewModel();  //de José : Funciona OK
         }
 
-        public void Refresh()
-        {
-            ExamsViewModel examsVM = new ExamsViewModel();
-            ComboBoxSubjects.ItemsSource = examsVM.GetSubjectsEVM();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Refresh();
-        }
     }
 }
